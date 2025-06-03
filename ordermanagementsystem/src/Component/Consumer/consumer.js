@@ -1,9 +1,9 @@
-import { ConstConsumer } from "../../Reusable/Const/constconsumer";
+import {  OrderList } from "../../Reusable/Const/constconsumer";
 
 const Consumer = () => {
     return (
         <>
-            <ConstConsumer/>
+            <OrderList/>
         </>
     );
 }

@@ -1,113 +1,110 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export const ConstConsumer = () => {
-    const [users, setUsers] = useState([]);
+export const OrderList = () => {
+  const [orders, setOrders] = useState([]);
 
-    useEffect(() => {
-        axios.get("https://jsonplaceholder.typicode.com/users")
-            .then((res) => setUsers(res.data))
-            .catch((err) => console.error("Error:", err));
-    }, []);
+  useEffect(() => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts?_limit=10")
+      .then((res) => setOrders(res.data))
+      .catch((err) => console.error("Error:", err));
+  }, []);
 
-    const CardStyle = {
-        cardContainer: {
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "30px",
-            padding: "40px 20px",
-            justifyContent: "center",
-            backgroundColor: "#f0f2f5",
-        },
+  const OrderListStyleSheet = {
+    container: {
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", // Fixed min width
+      justifyContent: "center",
+      gap: "30px",
+      padding: "4% 5%",
+      backgroundColor: "#f0f2f5",
+      width: "90%",
+      margin: "0 auto",
+    },
+    card: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "flex-start",
+      borderRadius: "20px",
+      background: "#ffffff",
+      boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
+      padding: "20px",
+      gap: "20px",
+      textAlign: "left",
+      minHeight: "250px",
+    },
+    title: {
+      fontSize: "20px",
+      fontWeight: "700",
+    },
+    ordername: {
+      fontSize: "14px",
+      color: "#555",
+    },
+    buttonGroup: {
+      display: "flex",
+      justifyContent: "space-between",
+      width: "100%",
+      gap: "12px",
+    },
+    btn: {
+      flex: 1,
+      padding: "12px 0",
+      fontSize: "16px",
+      fontWeight: "600",
+      borderRadius: "8px",
+      border: "none",
+      cursor: "pointer",
+      textAlign: "center",
+    },
+    acceptBtn: {
+      backgroundColor: "#28a745",
+      color: "#fff",
+    },
+    rejectBtn: {
+      backgroundColor: "#dc3545",
+      color: "#fff",
+    },
+  };
 
-        card: {
-            width: "320px",
-            borderRadius: "20px",
-            background: "#ffffff",
-            boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
-            transition: "all 0.3s ease",
-            overflow: "hidden",
-        },
+  const handleAccept = (id) => {
+    alert(`Order ${id} accepted`);
+  };
 
-        cardHeader: {
-            height: "200px",
-            backgroundColor: "#eee",
-            overflow: "hidden",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-        },
+  const handleReject = (id) => {
+    alert(`Order ${id} rejected`);
+  };
 
-        cardImg: {
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            transition: "transform 0.3s ease",
-        },
-
-        cardBody: {
-            padding: "20px",
-            textAlign: "center",
-        },
-
-        cardTitle: {
-            fontSize: "22px",
-            fontWeight: "700",
-            margin: "10px 0",
-            color: "#333",
-        },
-
-        cardSubtitle: {
-            fontSize: "16px",
-            fontWeight: "500",
-            color: "#777",
-            marginBottom: "6px",
-        },
-
-        cardText: {
-            fontSize: "14px",
-            color: "#555",
-            lineHeight: "1.5",
-        },
-
-        cardBtn: {
-            marginTop: "15px",
-            padding: "10px 20px",
-            backgroundColor: "#0066ff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "10px",
-            fontSize: "14px",
-            cursor: "pointer",
-            transition: "background 0.3s ease",
-        },
-
-        cardBtnHover: {
-            backgroundColor: "#004acc",
-        },
-    };
-
-
-
-    return (
-        <div style={CardStyle.cardContainer}>
-            {users.map((user) => (
-                <div style={CardStyle.card} key={user.id}>
-                    <div style={CardStyle.cardHeader}>
-                        <img
-                            src={`https://robohash.org/${user.username}?set=set5`}
-                            alt={user.name}
-                            style={CardStyle.cardImg}
-                        />
-                    </div>
-                    <div style={CardStyle.cardBody}>
-                        <h3 style={CardStyle.cardTitle}>{user.name}</h3>
-                        <p style={CardStyle.cardText}>{user.email}</p>
-                        <p style={CardStyle.cardText}>{user.phone}</p>
-                        <button style={CardStyle.cardBtn}>View Profile</button>
-                    </div>
-                </div>
-            ))}
+  return (
+    <div style={OrderListStyleSheet.container}>
+      {orders.map((order) => (
+        <div style={OrderListStyleSheet.card} key={order.id}>
+          <div style={OrderListStyleSheet.title}>{order.title}</div>
+          <div style={OrderListStyleSheet.ordername}>{order.body}</div>
+          <div style={OrderListStyleSheet.buttonGroup}>
+            <button
+              style={{
+                ...OrderListStyleSheet.btn,
+                ...OrderListStyleSheet.acceptBtn,
+              }}
+              onClick={() => handleAccept(order.id)}
+            >
+              Accept
+            </button>
+            <button
+              style={{
+                ...OrderListStyleSheet.btn,
+                ...OrderListStyleSheet.rejectBtn,
+              }}
+              onClick={() => handleReject(order.id)}
+            >
+              Reject
+            </button>
+          </div>
         </div>
-    );
+      ))}
+    </div>
+  );
 };
