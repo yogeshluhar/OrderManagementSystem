@@ -8,7 +8,7 @@ import ConstCustomer from './Reusable/Const/constcustomer';
 function App() {
   return (
     <div className="App">
-      <ShopList/>
+      <Customer/>
     </div>
   );
 }
