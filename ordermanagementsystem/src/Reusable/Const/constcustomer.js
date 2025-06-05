@@ -1,13 +1,13 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
 import {
+  useNavigate,
+  useLocation,
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
-  useLocation,
 } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 // ----------- CartContext -------------
 const CartContext = createContext();
@@ -86,7 +86,8 @@ const TopBar = () => {
 
 // ----------- Cart Page -------------
 const CartPage = () => {
-  const { cartItems, incrementQuantity, decrementQuantity } = useContext(CartContext);
+  const { cartItems, incrementQuantity, decrementQuantity } =
+    useContext(CartContext);
   const navigate = useNavigate();
 
   const subtotal = cartItems.reduce(
@@ -97,38 +98,31 @@ const CartPage = () => {
   const grandTotal = subtotal + gst;
 
   return (
-    <div
-      style={{
-        padding: "20px",
-        maxWidth: "600px",
-        margin: "80px auto",
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-        color: "#333",
-      }}
-    >
-      <button
-        onClick={() => navigate(-1)}
+    <div style={styles.cartPage}>
+      <div
         style={{
-          marginBottom: "20px",
-          padding: "8px 16px",
-          backgroundColor: "#007bff",
-          color: "#fff",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-          fontWeight: "600",
-          fontSize: "14px",
-          transition: "background-color 0.3s ease",
-        }}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#0056b3")}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#007bff")}
-      >
-        ← Back
-      </button>
+          display: "flex",
+          alignContent: "stretch",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexDirection: "row",
+          marginBottom: "10px",
+        }}>
+        <button
+          onClick={() => navigate(-1)}
+          style={styles.backButton}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.backgroundColor = "#0056b3")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = "#007bff")
+          }
+        >
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
 
-      <h2 style={{ marginBottom: "20px", fontWeight: "700", fontSize: "1.6rem" }}>
-        🛒 Your Cart
-      </h2>
+        <h2 style={{...styles.title, margin:0}}>🛒 Your Cart</h2>
+      </div>
 
       {cartItems.length === 0 ? (
         <p style={{ fontSize: "1.1rem", textAlign: "center", color: "#555" }}>
@@ -138,26 +132,11 @@ const CartPage = () => {
         <>
           <ul style={{ listStyle: "none", padding: 0, marginBottom: "20px" }}>
             {cartItems.map((item, index) => (
-              <li
-                key={index}
-                style={{
-                  display: "flex",
-                  gap: "16px",
-                  alignItems: "center",
-                  marginBottom: "20px",
-                  padding: "12px 8px",
-                  borderBottom: "1px solid #ddd",
-                }}
-              >
+              <li key={index} style={styles.cartItem}>
                 <img
                   src={item.image}
                   alt={item.name}
-                  style={{
-                    width: "70px",
-                    height: "70px",
-                    objectFit: "contain",
-                    borderRadius: "4px",
-                  }}
+                  style={styles.cartItemImage}
                 />
                 <div style={{ flex: 1 }}>
                   <strong
@@ -169,7 +148,9 @@ const CartPage = () => {
                       color: "#333",
                     }}
                   >
-                    {item.name.length > 30 ? item.name.slice(0, 30) + "..." : item.name}
+                    {item.name.length > 30
+                      ? item.name.slice(0, 30) + "..."
+                      : item.name}
                   </strong>
 
                   <div style={{ fontSize: "0.95rem", color: "#555" }}>
@@ -177,73 +158,31 @@ const CartPage = () => {
                     {(item.price * item.quantity).toFixed(2)}
                   </div>
 
-                  <div
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      marginTop: "8px",
-                      gap: "10px",
-                    }}
-                  >
+                  <div style={styles.quantityControls}>
                     <button
                       onClick={() => decrementQuantity(item.name)}
-                      style={{
-                        backgroundColor: "#eee",
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                        width: "30px",
-                        height: "30px",
-                        fontWeight: "700",
-                        fontSize: "18px",
-                        lineHeight: "18px",
-                        cursor: "pointer",
-                        color: "#555",
-                        userSelect: "none",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = "#ddd";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "#eee";
-                      }}
+                      style={styles.quantityButton}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor = "#0056b3")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor = "#007bff")
+                      }
                     >
                       −
                     </button>
 
-                    <span
-                      style={{
-                        minWidth: "26px",
-                        textAlign: "center",
-                        fontWeight: "600",
-                        fontSize: "1rem",
-                        color: "#555",
-                        userSelect: "none",
-                      }}
-                    >
-                      {item.quantity}
-                    </span>
+                    <span style={styles.quantityNumber}>{item.quantity}</span>
 
                     <button
                       onClick={() => incrementQuantity(item.name)}
-                      style={{
-                        backgroundColor: "#eee",
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                        width: "30px",
-                        height: "30px",
-                        fontWeight: "700",
-                        fontSize: "18px",
-                        lineHeight: "18px",
-                        cursor: "pointer",
-                        color: "#555",
-                        userSelect: "none",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = "#ddd";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "#eee";
-                      }}
+                      style={styles.quantityButton}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor = "#0056b3")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor = "#007bff")
+                      }
                     >
                       +
                     </button>
@@ -253,19 +192,9 @@ const CartPage = () => {
             ))}
           </ul>
 
-          <hr style={{ borderColor: "#ccc", marginBottom: "20px" }} />
+          <hr style={{ borderColor: "#ccc",    }} />
 
-          <div
-            style={{
-              fontSize: "1.1rem",
-              fontWeight: "600",
-              color: "#333",
-              lineHeight: "1.5",
-              display: "flex",
-              flexDirection: "column",
-              gap: "8px",
-            }}
-          >
+          <div style={styles.totalDetails}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <span>Subtotal:</span>
               <span>₹{subtotal.toFixed(2)}</span>
@@ -274,28 +203,18 @@ const CartPage = () => {
               <span>GST (18%):</span>
               <span>₹{gst.toFixed(2)}</span>
             </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                fontWeight: "700",
-                fontSize: "1.3rem",
-                borderTop: "1px solid #ccc",
-                paddingTop: "12px",
-                marginTop: "12px",
-                color: "#007bff",
-              }}
-            >
+            <div style={styles.grandTotal}>
               <span>Grand Total:</span>
               <span>₹{grandTotal.toFixed(2)}</span>
             </div>
           </div>
+
+          <button type="button" style={styles.addToCartButton}>Buy Now</button>
         </>
       )}
     </div>
   );
 };
-
 
 // ----------- Available Orders (API) -------------
 const ItemList = () => {
@@ -340,12 +259,12 @@ const ItemList = () => {
               <button
                 style={styles.addToCartButton}
                 onMouseEnter={(e) =>
-                (e.target.style.backgroundColor =
-                  styles.addToCartButtonHover.backgroundColor)
+                  (e.target.style.backgroundColor =
+                    styles.addToCartButtonHover.backgroundColor)
                 }
                 onMouseLeave={(e) =>
-                (e.target.style.backgroundColor =
-                  styles.addToCartButton.backgroundColor)
+                  (e.target.style.backgroundColor =
+                    styles.addToCartButton.backgroundColor)
                 }
                 onClick={() => addToCart(item)}
               >
@@ -356,12 +275,12 @@ const ItemList = () => {
                 <button
                   style={styles.quantityButton}
                   onMouseEnter={(e) =>
-                  (e.target.style.backgroundColor =
-                    styles.quantityButtonHover.backgroundColor)
+                    (e.target.style.backgroundColor =
+                      styles.quantityButtonHover.backgroundColor)
                   }
                   onMouseLeave={(e) =>
-                  (e.target.style.backgroundColor =
-                    styles.quantityButton.backgroundColor)
+                    (e.target.style.backgroundColor =
+                      styles.quantityButton.backgroundColor)
                   }
                   onClick={() => decrementQuantity(name)}
                 >
@@ -371,12 +290,12 @@ const ItemList = () => {
                 <button
                   style={styles.quantityButton}
                   onMouseEnter={(e) =>
-                  (e.target.style.backgroundColor =
-                    styles.quantityButtonHover.backgroundColor)
+                    (e.target.style.backgroundColor =
+                      styles.quantityButtonHover.backgroundColor)
                   }
                   onMouseLeave={(e) =>
-                  (e.target.style.backgroundColor =
-                    styles.quantityButton.backgroundColor)
+                    (e.target.style.backgroundColor =
+                      styles.quantityButton.backgroundColor)
                   }
                   onClick={() => incrementQuantity(name)}
                 >
@@ -384,7 +303,6 @@ const ItemList = () => {
                 </button>
               </div>
             )}
-
           </div>
         );
       })}
@@ -481,18 +399,9 @@ const Main = () => {
       )}
 
       <Routes>
-        <Route
-          path="/"
-          element={<ItemList />}
-        />
-        <Route
-          path="/available"
-          element={<ItemList />}
-        />
-        <Route
-          path="/intake"
-          element={<IntakeList />}
-        />
+        <Route path="/" element={<ItemList />} />
+        <Route path="/available" element={<ItemList />} />
+        <Route path="/intake" element={<IntakeList />} />
         <Route path="/cart" element={<CartPage />} />
       </Routes>
     </>
@@ -558,11 +467,19 @@ const styles = {
   },
   cartItem: {
     display: "flex",
-    gap: "12px",
-    marginBottom: "12px",
     alignItems: "center",
-    borderBottom: "1px solid #eee",
-    paddingBottom: "12px",
+    marginBottom: "10px",
+    padding: "10px",
+    border: "1px solid rgb(221, 221, 221)",
+    borderRadius: "8px",
+    backgroundColor: "rgb(249, 249, 249)",
+
+    // display: "flex",
+    // gap: "12px",
+    // marginBottom: "12px",
+    // alignItems: "center",
+    // borderBottom: "1px solid #eee",
+    // paddingBottom: "12px",
   },
   cartImg: {
     width: "50px",
@@ -574,11 +491,11 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#f9f9f9",
+    // backgroundColor: "#f9f9f9",
     borderRadius: "20px",
     padding: "6px 12px",
     gap: "8px",
-    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+    // boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
   },
   quantityButton: {
     backgroundColor: "#007bff",
@@ -613,7 +530,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     gap: "20px",
-    padding: "30px",
+    padding: "15px 0",
     flexWrap: "wrap",
   },
   card: {
@@ -678,17 +595,39 @@ const styles = {
     backgroundColor: "#0056b3",
   },
   backButton: {
-    marginBottom: "24px",
     padding: "8px 18px",
     backgroundColor: "#007bff",
     color: "#fff",
     border: "none",
-    borderRadius: "6px",
+    borderRadius: "10px",
     cursor: "pointer",
     fontWeight: "600",
     transition: "background-color 0.3s ease",
   },
+  cartPage: {
+    padding: "20px",
+    maxWidth: "800px",
+    margin: "auto",
+    marginTop: "50px ",
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    color: "#333",
+  },
+  cartItemImage: {
+    width: "70px",
+    height: "70px",
+    objectFit: "contain",
+    borderRadius: "4px",
+  },
+  grandTotal: {
+    display: "flex",
+    justifyContent: "space-between",
+    fontWeight: "700",
+    fontSize: "1.3rem",
+    borderTop: "1px solid #ccc",
+    paddingTop: "12px",
+    marginTop: "12px",
+    color: "#007bff",
+  },
 };
-
 
 export default ConstCustomer;
