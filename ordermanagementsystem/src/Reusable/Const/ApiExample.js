@@ -7,7 +7,7 @@ const ShopList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("https://cat-talented-haddock.ngrok-free.app/shops/",{"headers":{"Content-Type":"application/json","ngrok-skip-browser-warning": "69420"}})
+    axios.get("https://mammoth-arriving-heartily.ngrok-free.app/shops/",{"headers":{"Content-Type":"application/json","ngrok-skip-browser-warning": "69420"}})
       .then((data) => {
         setShops(data.data);
         console.log(data)

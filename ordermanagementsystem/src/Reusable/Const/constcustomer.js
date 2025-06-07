@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 // ----------- CartContext -------------
 const CartContext = createContext();
@@ -217,6 +218,7 @@ const CartPage = () => {
 };
 
 // ----------- Available Orders (API) -------------
+
 const ItemList = () => {
   const { cartItems, addToCart, incrementQuantity, decrementQuantity } =
     useContext(CartContext);
@@ -224,10 +226,15 @@ const ItemList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setItems(data);
+    axios
+      .get("https://mammoth-arriving-heartily.ngrok-free.app/products",{headers:{"ngrok-skip-browser-warning": "69420"}})
+      .then((res) => {
+        console.log("API Response:", res.data);
+        const fetchedItems = Array.isArray(res.data)
+          ? res.data
+          : res.data.products || [];
+
+        setItems(fetchedItems);
         setLoading(false);
       })
       .catch((err) => {
