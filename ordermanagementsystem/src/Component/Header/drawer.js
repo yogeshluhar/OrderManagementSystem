@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -15,6 +14,8 @@ import {
   Trolley02Icon,
 } from "@hugeicons/core-free-icons";
 import "../../Reusable/StyleSheet/constadmin.css";
+import { CheckListIcon } from "@hugeicons/core-free-icons/index";
+import SwitchBtn from "../../Reusable/Const/orderswitchbtn";
 
 const styles = {
   topBarStyle: {
@@ -162,7 +163,7 @@ const IsDrawer = () => {
 
           <ul style={styles.drawerList}>
             {/* Products with submenu */}
-            <li
+            {/* <li
               className="listItemStyleHover"
               onClick={toggleProductSubMenu}
               style={{
@@ -217,7 +218,20 @@ const IsDrawer = () => {
                   </NavLink>
                 </li>
               </ul>
-            )}
+            )} */}
+
+            <li className="listItemStyleHover" style={styles.listItemStyle}>
+              <NavLink to="/product" style={styles.linkStyle}>
+                <HugeiconsIcon
+                  icon={DeliveryBox01Icon}
+                  size={24}
+                  color="#fff"
+                  strokeWidth={2}
+                  style={styles.icon}
+                />
+                Product
+              </NavLink>
+            </li>
 
             <li className="listItemStyleHover" style={styles.listItemStyle}>
               <NavLink to="/orders" style={styles.linkStyle}>
@@ -233,19 +247,27 @@ const IsDrawer = () => {
             </li>
 
             <li className="listItemStyleHover" style={styles.listItemStyle}>
-              <NavLink to="/profile" style={styles.linkStyle}>
-                Profile
+              <NavLink to="/inventory" style={styles.linkStyle}>
+                <HugeiconsIcon
+                  icon={CheckListIcon}
+                  size={24}
+                  color="#fff"
+                  strokeWidth={2}
+                  style={styles.icon}
+                />
+                Inventory
               </NavLink>
             </li>
 
-            <li className="listItemStyleHover" style={styles.listItemStyle}>
+            {/* <li className="listItemStyleHover" style={styles.listItemStyle}>
               <NavLink to="/settings" style={styles.linkStyle}>
                 Settings
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </div>
       </Drawer>
+      {/* <SwitchBtn /> */}
     </>
   );
 };
