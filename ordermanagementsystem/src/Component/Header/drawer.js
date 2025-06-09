@@ -15,7 +15,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import "../../Reusable/StyleSheet/constadmin.css";
 import { CheckListIcon } from "@hugeicons/core-free-icons/index";
-import SwitchBtn from "../../Reusable/Const/orderswitchbtn";
+import SwitchBtn from "../../Reusable/Const/switchbtn";
 
 const styles = {
   topBarStyle: {
@@ -30,7 +30,7 @@ const styles = {
     background: "transparent",
     border: "none",
     cursor: "pointer",
-    fontWeight: "clamp(10px, 3vw, 30px)"
+    fontWeight: "clamp(10px, 3vw, 30px)",
   },
   drawerContainer: {
     width: "260px",
@@ -77,19 +77,19 @@ const styles = {
   icon: {
     marginRight: "10px",
   },
-  subMenuList: {
-    listStyle: "none",
-    padding: "0",
-  },
-  subMenuItem: {
-    fontSize: "15px",
-    color: "#fff",
-    cursor: "pointer",
-    padding: "14px 24px",
-    marginRight: "20px",
-    borderRadius: "0 20px 20px 0px",
-    // borderBottom: "1px solid #eee",
-  },
+  // subMenuList: {
+  //   listStyle: "none",
+  //   padding: "0",
+  // },
+  // subMenuItem: {
+  //   fontSize: "15px",
+  //   color: "#fff",
+  //   cursor: "pointer",
+  //   padding: "14px 24px",
+  //   marginRight: "20px",
+  //   borderRadius: "0 20px 20px 0px",
+  //   // borderBottom: "1px solid #eee",
+  // },
   linkStyle: {
     textDecoration: "none",
     color: "#fff",
@@ -100,9 +100,9 @@ const styles = {
 
 const IsDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showProductSubMenu, setShowProductSubMenu] = useState(false);
+  // const [showProductSubMenu, setShowProductSubMenu] = useState(false);
   const toggleDrawer = () => setIsOpen((prev) => !prev);
-  const toggleProductSubMenu = () => setShowProductSubMenu((prev) => !prev);
+  // const toggleProductSubMenu = () => setShowProductSubMenu((prev) => !prev);
 
   return (
     <>
@@ -155,9 +155,9 @@ const IsDrawer = () => {
           <hr
             style={{
               border: "none",
-              borderBottom: "2px solid #ccc",
-              marginBottom: "10px",
+              borderBottom: "1px solid #ccc",
               width: "90%",
+              margin: "0 10px",
             }}
           />
 
@@ -246,7 +246,7 @@ const IsDrawer = () => {
               </NavLink>
             </li>
 
-            <li className="listItemStyleHover" style={styles.listItemStyle}>
+            {/* <li className="listItemStyleHover" style={styles.listItemStyle}>
               <NavLink to="/inventory" style={styles.linkStyle}>
                 <HugeiconsIcon
                   icon={CheckListIcon}
@@ -257,7 +257,7 @@ const IsDrawer = () => {
                 />
                 Inventory
               </NavLink>
-            </li>
+            </li> */}
 
             {/* <li className="listItemStyleHover" style={styles.listItemStyle}>
               <NavLink to="/settings" style={styles.linkStyle}>
