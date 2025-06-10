@@ -7,7 +7,7 @@ const Button = ({
   fontSize = "20px",
   fontWeight = "500",
   backgroundColor = "rgb(38, 83, 227",
-  borderRaidus = "5px",
+  borderRaidus = "10px",
 }) => {
   return (
     <>
