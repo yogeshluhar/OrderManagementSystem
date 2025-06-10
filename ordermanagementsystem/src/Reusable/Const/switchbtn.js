@@ -15,7 +15,7 @@ const SwitchBtn = () => {
       justifyContent: "space-around",
       alignItems: "center",
       background: "#f0f0f0",
-      padding: "5px",
+      padding: "4px",
       borderRadius: "3rem",
     },
     orderbtn: (isActive) => ({
@@ -31,7 +31,7 @@ const SwitchBtn = () => {
       transition: "all 0.3s ease",
       cursor: "pointer",
     }),
-    historybtn: (isActive) => ({
+    productbtn: (isActive) => ({
       height: "2.5rem",
       width: "8rem",
       borderRadius: "2rem",
@@ -58,10 +58,10 @@ const SwitchBtn = () => {
             Order
           </button>
           <button
-            style={SwitchBtnStyleSheet.historybtn(activeTab === "history")}
-            onClick={() => setActiveTab("history")}
+            style={SwitchBtnStyleSheet.productbtn(activeTab === "product")}
+            onClick={() => setActiveTab("product")}
           >
-            History
+            Product
           </button>
         </div>
       </div>
