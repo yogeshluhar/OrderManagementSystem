@@ -7,6 +7,7 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    minHeight: '54px',
     padding: "8px 16px",
     background: "rgb(37, 82, 255)",
     color: "white",

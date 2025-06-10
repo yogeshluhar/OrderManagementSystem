@@ -14,33 +14,33 @@ const SwitchBtn = () => {
       display: "flex",
       justifyContent: "space-around",
       alignItems: "center",
-      background: "#f0f0f0",
-      padding: "4px",
+      background: "rgb(37, 82, 255)",
+      padding: "5px",
       borderRadius: "3rem",
     },
     orderbtn: (isActive) => ({
-      height: "2.5rem",
+      height: "3rem",
       width: "8rem",
       borderRadius: "2rem",
       border: "none",
       outline: "none",
-      fontSize: "15px",
-      fontWeight: "500",
-      background: isActive ? "rgb(37, 82, 255)" : "transparent",
-      color: isActive ? "#fff" : "#333",
+      fontSize: "20px",
+      fontWeight: "bold",
+      background: isActive ? "white" : "transparent",
+      color: isActive ? "#333" : "#fff",
       transition: "all 0.3s ease",
       cursor: "pointer",
     }),
     productbtn: (isActive) => ({
-      height: "2.5rem",
+      height: "3rem",
       width: "8rem",
       borderRadius: "2rem",
       border: "none",
       outline: "none",
-      fontSize: "15px",
-      fontWeight: "500",
-      background: isActive ? "rgb(37, 82, 255)" : "transparent",
-      color: isActive ? "#fff" : "#333",
+      fontSize: "20px",
+      fontWeight: "bold",
+      background: isActive ? "white" : "transparent",
+      color: isActive ? "#333" : "#fff",
       transition: "all 0.3s ease",
       cursor: "pointer",
     }),
@@ -55,13 +55,13 @@ const SwitchBtn = () => {
             style={SwitchBtnStyleSheet.orderbtn(activeTab === "order")}
             onClick={() => setActiveTab("order")}
           >
-            Order
+            Orders
           </button>
           <button
             style={SwitchBtnStyleSheet.productbtn(activeTab === "product")}
             onClick={() => setActiveTab("product")}
           >
-            Product
+            Products
           </button>
         </div>
       </div>
