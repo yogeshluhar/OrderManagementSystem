@@ -12,7 +12,7 @@ const Button = ({
   return (
     <>
       <button
-        onclick={onClick}
+        onClick={onClick}
         style={{
           width: width,
           height: height,

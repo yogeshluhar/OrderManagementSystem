@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Stylesheet from "reactjs-stylesheet";
 import "./App.css";
 import AddToProduct from "./Product/addToProduct";
+import CardItem from "./Product/cardItem";
 import BackgroundContainer from "./Reusable/Const/backgroundContainer";
 
 import Header from "./Reusable/Const/header";
@@ -14,6 +15,7 @@ function App() {
       <Header />
       <SwitchBtn />
       <BackgroundContainer>
+        <CardItem/>
       </BackgroundContainer>
     </div>
   );
