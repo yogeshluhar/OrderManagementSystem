@@ -4,7 +4,7 @@ const Button = ({
   children,
   onClick,
   color = "white",
-  fontSize = "20px",
+  fontSize = "24px",
   fontWeight = "500",
   backgroundColor = "rgb(38, 83, 227",
   borderRaidus = "10px",
