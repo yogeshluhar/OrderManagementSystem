@@ -8,7 +8,7 @@ const SwitchBtn = () => {
     switchcontainer: {
       display: "flex",
       justifyContent: "center",
-      marginTop: '10px'
+      margin: '12px 0'
     },
     switchbtn: {
       display: "flex",
@@ -19,12 +19,12 @@ const SwitchBtn = () => {
       borderRadius: "3rem",
     },
     orderbtn: (isActive) => ({
-      height: "3rem",
+      height: "2.9rem",
       width: "8rem",
       borderRadius: "2rem",
       border: "none",
       outline: "none",
-      fontSize: "20px",
+      fontSize: "19px",
       fontWeight: "bold",
       background: isActive ? "white" : "transparent",
       color: isActive ? "#333" : "#fff",
@@ -32,12 +32,12 @@ const SwitchBtn = () => {
       cursor: "pointer",
     }),
     productbtn: (isActive) => ({
-      height: "3rem",
+      height: "2.9rem",
       width: "8rem",
       borderRadius: "2rem",
       border: "none",
       outline: "none",
-      fontSize: "20px",
+      fontSize: "19px",
       fontWeight: "bold",
       background: isActive ? "white" : "transparent",
       color: isActive ? "#333" : "#fff",
