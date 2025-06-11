@@ -9,7 +9,7 @@ const modalStyle = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 9999,
+    zIndex: 10000,
   },
   content: {
     backgroundColor: "#fff",
@@ -39,8 +39,9 @@ const modalStyle = {
   },
   buttonsRow: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     marginTop: "10px",
+    gap: '10px',
     width: "100%",
   },
   imageCircle: {
@@ -220,11 +221,11 @@ const AddToProduct = () => {
                 onClick={closeModal}
                 backgroundColor="#dc3545"
                 color="#fff"
-                width="120px"
-                height="36px"
-                fontSize="14px"
-                fontWeight="500"
-                borderRadius="5px"
+                width="160px"
+                height="50px"
+                fontSize="16px"
+                fontWeight="700"
+                borderRadius="3rem"
               >
                 Cancel
               </Button>
@@ -233,11 +234,11 @@ const AddToProduct = () => {
                 type="submit"
                 backgroundColor="#28a745"
                 color="#fff"
-                width="120px"
-                height="36px"
-                fontSize="14px"
-                fontWeight="500"
-                borderRadius="5px"
+                width="160px"
+                height="50px"
+                fontSize="16px"
+                fontWeight="700"
+                borderRadius="3rem"
               >
                 Submit
               </Button>

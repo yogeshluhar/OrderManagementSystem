@@ -7,7 +7,7 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    minHeight: '54px',
+    minHeight: '60px',
     padding: "8px 16px",
     background: "rgb(37, 82, 255)",
     color: "white",
@@ -31,7 +31,7 @@ const styles = {
   },
   subMenu: {
     position: "absolute",
-    top: "100%",
+    top: "120%",
     right: 0,
     backgroundColor: "white",
     listStyle: "none",
