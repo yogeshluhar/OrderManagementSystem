@@ -68,30 +68,74 @@ const CardItemStyle = {
     gap: "10px",
     marginTop: "8px",
   },
+  modalOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 2000,
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    padding: "20px",
+    borderRadius: "16px",
+    width: "90%",
+    maxWidth: "400px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
+  },
+  input: {
+    padding: "10px",
+    fontSize: "14px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+  },
 };
 
-const products = [
-  { id: 1, title: "Product A", desc: "A cool product", price: 10 },
-  { id: 2, title: "Product B", desc: "Even cooler", price: 15 },
-  { id: 3, title: "Product C", desc: "The coolest", price: 20 },
-  { id: 4, title: "Product D", desc: "Not bad", price: 12 },
-  { id: 5, title: "Product E", desc: "Top tier", price: 18 },
-];
-
 const CardItem = () => {
-  // initialize available status per product
+  const [products, setProducts] = useState([
+    { id: 1, title: "Product A", desc: "A cool product", price: 10 },
+    { id: 2, title: "Product B", desc: "Even cooler", price: 15 },
+    { id: 3, title: "Product C", desc: "The coolest", price: 20 },
+    { id: 4, title: "Product D", desc: "Not bad", price: 12 },
+    { id: 5, title: "Product E", desc: "Top tier", price: 18 },
+  ]);
+
   const [availability, setAvailability] = useState(
     products.reduce((acc, item) => {
-      acc[item.id] = true; // default is available
+      acc[item.id] = true;
       return acc;
     }, {})
   );
+
+  const [showModal, setShowModal] = useState(false);
+  const [newProduct, setNewProduct] = useState({ title: "", desc: "", price: "" });
 
   const toggleAvailability = (id) => {
     setAvailability((prev) => ({
       ...prev,
       [id]: !prev[id],
     }));
+  };
+
+  const handleAddProduct = () => {
+    if (!newProduct.title || !newProduct.desc || !newProduct.price) return alert("Fill all fields");
+    const newId = products.length + 1;
+    const updatedProduct = {
+      id: newId,
+      ...newProduct,
+      price: parseFloat(newProduct.price),
+    };
+    setProducts([...products, updatedProduct]);
+    setAvailability((prev) => ({ ...prev, [newId]: true }));
+    setShowModal(false);
+    setNewProduct({ title: "", desc: "", price: "" });
   };
 
   return (
@@ -119,13 +163,13 @@ const CardItem = () => {
                 <div style={CardItemStyle.buttonGroup}>
                   <Button
                     onClick={() => toggleAvailability(item.id)}
-                    backgroundColor={isAvailable ? "#28a745" : "#dc3545"} // green or red
+                    backgroundColor={isAvailable ? "#28a745" : "#dc3545"}
                     color="#fff"
                     width="100px"
                     height="36px"
                     fontSize="14px"
                     fontWeight="500"
-                    borderRadius="12px"
+                    borderRadius="5px"
                   >
                     {isAvailable ? "Available" : "Unavailable"}
                   </Button>
@@ -137,7 +181,7 @@ const CardItem = () => {
                     height="36px"
                     fontSize="14px"
                     fontWeight="500"
-                    borderRadius="12px"
+                    borderRadius="5px"
                   >
                     Edit
                   </Button>
@@ -150,6 +194,7 @@ const CardItem = () => {
 
       <div style={CardItemStyle.fixedButtonContainer}>
         <Button
+          onClick={() => setShowModal(true)}
           width="80%"
           height="40px"
           fontSize="16px"
@@ -159,6 +204,60 @@ const CardItem = () => {
           Add Product
         </Button>
       </div>
+
+      {showModal && (
+        <div style={CardItemStyle.modalOverlay}>
+          <div style={CardItemStyle.modalContent}>
+            <input
+              type="text"
+              placeholder="Product Title"
+              value={newProduct.title}
+              onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
+              style={CardItemStyle.input}
+            />
+            <input
+              type="text"
+              placeholder="Description"
+              value={newProduct.desc}
+              onChange={(e) => setNewProduct({ ...newProduct, desc: e.target.value })}
+              style={CardItemStyle.input}
+            />
+            <input
+              type="number"
+              placeholder="Price"
+              value={newProduct.price}
+              onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+              style={CardItemStyle.input}
+            />
+            <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}>
+              <Button
+                onClick={() => setShowModal(false)}
+                backgroundColor="#6c757d"
+                color="#fff"
+                width="100px"
+                height="36px"
+                fontSize="14px"
+                fontWeight="500"
+                borderRadius="5px"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleAddProduct}
+                backgroundColor="#28a745"
+                color="#fff"
+                width="100px"
+                height="36px"
+                fontSize="14px"
+                fontWeight="500"
+                borderRadius="5px"
+              >
+                Submit
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

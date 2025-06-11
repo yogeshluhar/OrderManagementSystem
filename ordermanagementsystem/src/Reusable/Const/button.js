@@ -7,7 +7,7 @@ const Button = ({
   fontSize = "24px",
   fontWeight = "500",
   backgroundColor = "rgb(38, 83, 227",
-  borderRaidus = "10px",
+  borderRadius = "5px",
 }) => {
   return (
     <>
@@ -21,7 +21,7 @@ const Button = ({
           border: "none",
           fontWeight: fontWeight,
           cursor: "pointer",
-          borderRadius: borderRaidus,
+          borderRadius: borderRadius,
           fontSize: fontSize,
         }}
       >
