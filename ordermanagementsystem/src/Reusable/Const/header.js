@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { UserCircle02Icon } from "@hugeicons/core-free-icons/index";
 
 const styles = {
   topBar: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    minHeight: '54px',
+    minHeight: '60px',
     padding: "8px 16px",
     background: "rgb(37, 82, 255)",
     color: "white",
@@ -22,19 +22,16 @@ const styles = {
     position: "relative",
   },
   userButton: {
-    backgroundColor: "#ffffff", // white background
+    background: "rgb(37, 82, 255)",
     border: "none",
-    padding: "8px",
-    borderRadius: "6rem",
     cursor: "pointer",
-    color: "rgb(37, 82, 255)",   
-    fontSize: "16px",
-    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
     transition: "all 0.3s ease",
-  }, 
+    display: 'flex',
+    alignItems: 'center'
+  },
   subMenu: {
     position: "absolute",
-    top: "100%",
+    top: "120%",
     right: 0,
     backgroundColor: "white",
     listStyle: "none",
@@ -76,12 +73,16 @@ const Header = () => {
           style={{
             ...styles.userButton,
             ...(hoveredItem === "button" && {
-              backgroundColor: "#f0f0ff",
               transform: "scale(1.05)",
             }),
           }}
         >
-          <FontAwesomeIcon icon={faUser} />
+          <HugeiconsIcon
+            icon={UserCircle02Icon}
+            size={36}
+            color="#fff"
+            strokeWidth={2}
+          />
         </button>
 
         {isMenuOpen && (

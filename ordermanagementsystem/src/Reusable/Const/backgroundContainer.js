@@ -2,7 +2,6 @@ const styles = {
   bgContainer: {
     backgroundColor: "#d9e6ff",
     minHeight: "100vh",
-    padding: "16px 15px",
     margin: "10px 10px 0 10px",
     borderTopLeftRadius: "2rem",
     borderTopRightRadius: "2rem",
@@ -13,7 +12,8 @@ const styles = {
   innerContainer: {
     width: "100%",
     maxWidth: "800px", 
-    overflow: 'hidden'
+    overflow: 'hidden',
+    justifyContent: "center", 
   },
 };
 

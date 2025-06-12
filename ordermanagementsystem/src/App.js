@@ -4,6 +4,7 @@ import Stylesheet from "reactjs-stylesheet";
 import "./App.css";
 import AddToProduct from "./Product/addToProduct";
 import CardItem from "./Product/cardItem";
+import ProductStatusButtons from "./Product/statusbtn";
 import BackgroundContainer from "./Reusable/Const/backgroundContainer";
 
 import Header from "./Reusable/Const/header";
@@ -20,6 +21,8 @@ function App() {
         {/* <CardItem/> */}
         {/* <HistoryCard/> */}
         <Ordercards/>
+        <CardItem/>
+        <AddToProduct/>
       </BackgroundContainer>
     </div>
   );
