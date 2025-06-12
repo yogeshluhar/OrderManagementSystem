@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import axios from "axios";
 import Button from "../Reusable/Const/button";
 
 const modalStyle = {
@@ -128,19 +129,20 @@ const AddToProduct = () => {
     };
 
     try {
-      const response = await fetch("http://longhorn-rested-widely.ngrok-free.app/api/products", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(productData),
-      });
+      const response = await axios.post(
+        "http://longhorn-rested-widely.ngrok-free.app/api/products",
+        productData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      if (!response.ok) throw new Error("Something went wrong");
-
-      const result = await response.json();
-      console.log("Posted successfully:", result);
+      console.log("Posted successfully:", response.data);
       closeModal();
     } catch (err) {
-      console.error("Error:", err);
+      console.error("Axios Error:", err);
     }
   };
 
@@ -161,13 +163,11 @@ const AddToProduct = () => {
         </Button>
       </div>
 
-
       {isModalOpen && (
         <div style={modalStyle.overlay}>
           <form style={modalStyle.content} onSubmit={handleSubmit}>
             <h3 style={{ textAlign: "center", marginBottom: "10px" }}>Add New Product</h3>
 
-            {/* Circular Image Upload */}
             <div style={modalStyle.imageCircle} onClick={handleCircleClick}>
               {previewUrl ? (
                 <img src={previewUrl} alt="Preview" style={modalStyle.imageTag} />
@@ -183,7 +183,6 @@ const AddToProduct = () => {
               />
             </div>
 
-            {/* Other Inputs */}
             <input
               style={modalStyle.input}
               type="text"

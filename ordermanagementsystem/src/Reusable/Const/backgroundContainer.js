@@ -6,15 +6,15 @@ const styles = {
     borderTopLeftRadius: "2rem",
     borderTopRightRadius: "2rem",
     display: "flex",
-    justifyContent: "center", // 👈 center the inner content
-    // flexDirection: "column"
-  },
-  innerContainer: {
-    width: "100%",
-    maxWidth: "800px", 
-    overflow: 'hidden',
     justifyContent: "center", 
+    
   },
+  // innerContainer: {
+  //   width: "100%",
+  //   maxWidth: "800px", 
+  //   overflow: 'hidden',
+  //   justifyContent: "center", 
+  // },
 };
 
 const BackgroundContainer = ({ children }) => {

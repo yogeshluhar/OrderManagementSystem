@@ -20,7 +20,7 @@ function App() {
       <BackgroundContainer>
         {/* <CardItem/> */}
         {/* <HistoryCard/> */}
-        <Ordercards/>
+        {/* <Ordercards/> */}
         <CardItem/>
         <AddToProduct/>
       </BackgroundContainer>
