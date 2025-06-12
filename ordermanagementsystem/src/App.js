@@ -8,6 +8,8 @@ import BackgroundContainer from "./Reusable/Const/backgroundContainer";
 
 import Header from "./Reusable/Const/header";
 import SwitchBtn from "./Reusable/Const/switchbtn";
+import Ordercards from "./Order/ordercard";
+import HistoryCard from "./Order/historycard";
 function App() {
 
   return (
@@ -15,7 +17,9 @@ function App() {
       <Header />
       <SwitchBtn />
       <BackgroundContainer>
-        <CardItem/>
+        {/* <CardItem/> */}
+        {/* <HistoryCard/> */}
+        <Ordercards/>
       </BackgroundContainer>
     </div>
   );
