@@ -59,7 +59,7 @@ const Header = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const menuItems = ["Profile", "Settings", "Logout"];
+  const menuItems = ["Profile", "Logout"];
 
   return (
     <div style={styles.topBar}>

@@ -130,11 +130,12 @@ const AddToProduct = () => {
 
     try {
       const response = await axios.post(
-        "http://longhorn-rested-widely.ngrok-free.app/api/products",
+        "http://longhorn-rested-widely.ngrok-free.app/products",
         productData,
         {
           headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
           },
         }
       );

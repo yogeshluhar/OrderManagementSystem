@@ -17,13 +17,7 @@ function App() {
     <div className="App">
       <Header />
       <SwitchBtn />
-      <BackgroundContainer>
-        {/* <CardItem/> */}
-        {/* <HistoryCard/> */}
-        {/* <Ordercards/> */}
-        <CardItem/>
-        <AddToProduct/>
-      </BackgroundContainer>
+   
     </div>
   );
 }

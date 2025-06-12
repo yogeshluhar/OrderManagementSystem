@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import Header from "./header";
+import Customer from "../../Component/Customer/customer";
+import BackgroundContainer from "./backgroundContainer";
+import Ordercards from "../../Order/ordercard";
 
 const SwitchBtn = () => {
   const [activeTab, setActiveTab] = useState("order");
 
- const SwitchBtnStyleSheet = {
+  const SwitchBtnStyleSheet = {
     switchcontainer: {
       display: "flex",
       justifyContent: "center",
-      margin: '12px 0'
+      margin: "12px 0",
     },
     switchbtn: {
       display: "flex",
@@ -46,7 +49,6 @@ const SwitchBtn = () => {
     }),
   };
 
-
   return (
     <>
       <div style={SwitchBtnStyleSheet.switchcontainer}>
@@ -67,7 +69,15 @@ const SwitchBtn = () => {
       </div>
 
       <div style={{ textAlign: "center", marginTop: "20px", fontSize: "18px" }}>
-        {activeTab === "order" ? <></>: <Header />}
+        {activeTab === "order" ? (
+          <BackgroundContainer>
+            <Ordercards />
+          </BackgroundContainer>
+        ) : (
+          <BackgroundContainer>
+            <Customer />
+          </BackgroundContainer>
+        )}
       </div>
     </>
   );

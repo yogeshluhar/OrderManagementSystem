@@ -1,21 +1,23 @@
 import { useState } from "react";
 import ProductStatusButtons from "./statusbtn";
-
+import { HugeiconsIcon } from "@hugeicons/react";
+import { CancelCircleIcon } from "@hugeicons/core-free-icons";
 const CardItemStyle = {
   wrapper: {
     boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
     gap: "16px",
-    padding: "10px",
+    padding: "10px ",
     width: "100%",
     maxWidth: "1400px",
+   
   },
   scrollableGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
     gap: "10px",
-    justifyItems: 'center'
+    justifyItems: "center",
   },
   cardContainer: {
     backgroundColor: "#fff",
@@ -28,12 +30,13 @@ const CardItemStyle = {
     width: "100%",
     maxWidth: "100%",
     boxSizing: "border-box",
+    position: "relative",
   },
   imageBox: {
-    width: "100px",
-    height: "100px",
+    width: "80px",
+    height: "80px",
     backgroundColor: "#ccc",
-    borderRadius: "1rem",
+    borderRadius: "5rem",
     overflow: "hidden",
     flexShrink: 0,
   },
@@ -43,19 +46,20 @@ const CardItemStyle = {
     justifyContent: "center",
     gap: "8px",
     flex: 1,
+    textAlign: 'left'
   },
   title: {
-    fontSize: "18px",
+    fontSize: "15px",
     fontWeight: "600",
     margin: 0,
   },
   desc: {
-    fontSize: "14px",
+    fontSize: "12px",
     color: "#555",
     margin: 0,
   },
   price: {
-    fontSize: "16px",
+    fontSize: "14px",
     fontWeight: "500",
     margin: 0,
   },
@@ -76,7 +80,15 @@ const CardItem = () => {
         {products.map((item) => (
           <div key={item.id} style={CardItemStyle.cardContainer}>
             {/* Image + Text */}
-            <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                gap: "16px",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
               <div style={CardItemStyle.imageBox}>
                 <img
                   src="https://www.wholeheartedeats.com/wp-content/uploads/2023/12/Baked-Samosas.jpg"
@@ -85,7 +97,26 @@ const CardItem = () => {
                 />
               </div>
               <div style={CardItemStyle.textBox}>
-                <h4 style={CardItemStyle.title}>{item.title}</h4>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignContent: 'center'}}>
+                  <h4 style={CardItemStyle.title}>{item.title}</h4>
+                  <div>
+                    <button
+                      style={{
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                      title="Delete"
+                    >
+                      <HugeiconsIcon
+                        icon={CancelCircleIcon}
+                        size={20}
+                        color="red"
+                        strokeWidth={2}
+                      />
+                    </button>
+                  </div>
+                </div>
                 <p style={CardItemStyle.desc}>{item.desc}</p>
                 <p style={CardItemStyle.price}>
                   <strong>Price:</strong> ₹{item.price}
@@ -95,7 +126,7 @@ const CardItem = () => {
 
             {/* Status Buttons below */}
             <div style={{ width: "100%" }}>
-              <div style={{display:'flex',justifyContent: 'space-around'}}>
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <ProductStatusButtons />
               </div>
             </div>

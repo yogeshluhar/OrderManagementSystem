@@ -8,7 +8,8 @@ const Button = ({
   fontWeight = "500",
   backgroundColor ,
   borderRadius = "5px",
-  flex
+  flex, 
+  boxShadow = ' 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
 }) => {
   return (
     <>
@@ -24,7 +25,8 @@ const Button = ({
           cursor: "pointer",
           borderRadius: borderRadius,
           fontSize: fontSize,
-          flex : flex
+          flex : flex,
+          boxShadow: boxShadow
         }}
       >
         {children}
