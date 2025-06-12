@@ -1,13 +1,14 @@
 const Button = ({
-  width = "100px",
-  height = "50px",
+  width ,
+  height ,
   children,
   onClick,
   color = "white",
   fontSize = "24px",
   fontWeight = "500",
-  backgroundColor = "rgb(38, 83, 227",
+  backgroundColor ,
   borderRadius = "5px",
+  flex
 }) => {
   return (
     <>
@@ -23,6 +24,7 @@ const Button = ({
           cursor: "pointer",
           borderRadius: borderRadius,
           fontSize: fontSize,
+          flex : flex
         }}
       >
         {children}
