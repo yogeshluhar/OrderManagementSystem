@@ -7,6 +7,7 @@ const styles = {
     borderTopRightRadius: "2rem",
     display: "flex",
     justifyContent: "center", 
+    padding: '10px',
     
   },
   // innerContainer: {

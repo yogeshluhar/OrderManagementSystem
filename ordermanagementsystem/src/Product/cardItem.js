@@ -8,7 +8,7 @@ const CardItemStyle = {
     display: "flex",
     flexDirection: "column",
     gap: "16px",
-    padding: "10px ",
+    // padding: "10px ",
     width: "100%",
     maxWidth: "1400px",
    

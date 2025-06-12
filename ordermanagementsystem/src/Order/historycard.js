@@ -70,7 +70,7 @@ export default function HistoryCard(params) {
           </div>
           <div style={styles.orderType}>Takeaway</div>
         </div>
-        <div style={styles.address}>Address : gkkjonjgnjnjbnjnfoiknnfjnnf</div>
+        <div style={styles.address}>Address : kdkladkadadas</div>
         <div style={styles.bill}>
             <div style={styles.orderhead}>Order</div>
              <div style={styles.orderItems}>

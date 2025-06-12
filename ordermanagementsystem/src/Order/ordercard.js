@@ -48,6 +48,8 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     fontWeight: "600",
+    fontSize: '14px',
+    textAlign: 'left',
     padding: "13px",
   },
 
@@ -68,7 +70,7 @@ const styles = {
   btnclick: {
     border: "0",
     backgroundColor: "transparent",
-    marginTop: "5px",
+    marginTop: "1px",
   },
 };
 
@@ -147,12 +149,14 @@ export default function Ordercards({ data }) {
                       icon={ArrowUpDoubleIcon}
                       size={16}
                       color="#000000"
+                      strokeWidth={2}
                     />
                   ) : (
                     <HugeiconsIcon
                       icon={ArrowDownDoubleIcon}
                       size={16}
                       color="#000000"
+                      strokeWidth={2}
                     />
                   )}
                 </span>
