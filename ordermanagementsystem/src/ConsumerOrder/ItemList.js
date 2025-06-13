@@ -23,8 +23,10 @@ const styles = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
     gap: "16px",
-    padding: "15px 5px",
-    backgroundColor: "#f9f9f9",
+    // padding: "15px 5px",
+    // backgroundColor: "#f9f9f9",
+    width: "100%",
+    alignItems: 'start',
     justifyItems: 'center'
   },
 };

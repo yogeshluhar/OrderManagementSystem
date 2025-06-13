@@ -26,7 +26,7 @@ const styles = {
   container: {
     position: "relative",
     cursor: "pointer",
-    fontSize: "24px",
+    fontSize: "20px",
   },
   badge: {
     position: "absolute",

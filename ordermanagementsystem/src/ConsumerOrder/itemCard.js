@@ -1,5 +1,4 @@
-import { HugeiconsIcon } from "@hugeicons/react";
-import { CancelCircleIcon } from "@hugeicons/core-free-icons";
+
 import AddToCartButton from "./addtocard";
 
 const CardItemStyle = {
@@ -11,7 +10,7 @@ const CardItemStyle = {
     gap: "16px",
     padding: "12px",
     alignItems: "center",
-    width: "250px",
+    width: "100%",
     boxSizing: "border-box",
   },
   imageBox: {

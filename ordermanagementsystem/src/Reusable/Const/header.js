@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  ShoppingCart02Icon,
   UserCircle02Icon,
 } from "@hugeicons/core-free-icons/index";
 import CartIcon from "../../ConsumerOrder/cardIcon";
@@ -55,7 +54,7 @@ const styles = {
   sideContainer: {
     display: "flex",
     alignItems: "center",
-    gap: "16px",
+    gap: "10px",
   },
 };
 
@@ -73,7 +72,7 @@ const Header = ({ userType }) => {
 
       <div style={styles.sideContainer}>
         {isCustomer && (
-           <div style={{ position: "relative" }}>
+           <div style={{ position: "relative" , top: '3px'}}>
             <CartIcon onClick={toggleCart} itemCount={3} />
             {showCart && <CartDropdown />}
           </div>
