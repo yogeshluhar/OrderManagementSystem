@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { UserCircle02Icon } from "@hugeicons/core-free-icons/index";
+import {
+  ShoppingCart02Icon,
+  UserCircle02Icon,
+} from "@hugeicons/core-free-icons/index";
+import CartIcon from "../../ConsumerOrder/cardIcon";
+import CartDropdown from "../../ConsumerOrder/cardpage";
 
 const styles = {
   topBar: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    minHeight: '60px',
+    minHeight: "60px",
     padding: "8px 16px",
     background: "rgb(37, 82, 255)",
     color: "white",
@@ -25,9 +30,8 @@ const styles = {
     background: "rgb(37, 82, 255)",
     border: "none",
     cursor: "pointer",
-    transition: "all 0.3s ease",
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center",
   },
   subMenu: {
     position: "absolute",
@@ -48,60 +52,75 @@ const styles = {
     color: "#333",
     whiteSpace: "nowrap",
   },
-  subMenuItemHover: {
-    backgroundColor: "#f5f5f5",
+  sideContainer: {
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
   },
 };
 
-const Header = () => {
+const Header = ({ userType }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState(null);
+  const isCustomer = userType === "consumer";
+    const [showCart, setShowCart] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleCart = () => setShowCart((prev) => !prev);
 
-  const menuItems = ["Profile", "Logout"];
 
   return (
     <div style={styles.topBar}>
       <h2 style={styles.title}>Header</h2>
 
-      <div style={styles.userMenu}>
-        <button
-          onClick={toggleMenu}
-          onMouseEnter={() => setHoveredItem("button")}
-          onMouseLeave={() => setHoveredItem(null)}
-          style={{
-            ...styles.userButton,
-            ...(hoveredItem === "button" && {
-              transform: "scale(1.05)",
-            }),
-          }}
-        >
-          <HugeiconsIcon
-            icon={UserCircle02Icon}
-            size={36}
-            color="#fff"
-            strokeWidth={2}
-          />
-        </button>
-
-        {isMenuOpen && (
-          <ul style={styles.subMenu}>
-            {menuItems.map((item, index) => (
-              <li
-                key={index}
-                style={{
-                  ...styles.subMenuItem,
-                  ...(hoveredItem === index ? styles.subMenuItemHover : {}),
-                }}
-                onMouseEnter={() => setHoveredItem(index)}
-                onMouseLeave={() => setHoveredItem(null)}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
+      <div style={styles.sideContainer}>
+        {isCustomer && (
+           <div style={{ position: "relative" }}>
+            <CartIcon onClick={toggleCart} itemCount={3} />
+            {showCart && <CartDropdown />}
+          </div>
+          /* <div style={{ cursor: "pointer", position: "relative", bottom: '-2px' }}>
+            <HugeiconsIcon
+              icon={ShoppingCart02Icon}
+              size={32}
+              color="#fff"
+              strokeWidth={2}
+            />
+            <span
+              style={{
+                position: "absolute",
+                top: "-6px",
+                right: "-10px",
+                backgroundColor: "red",
+                color: "#fff",
+                borderRadius: "50%",
+                padding: "2px 6px",
+                fontSize: "12px",
+              }}
+            >
+              3
+            </span>
+          </div> */
         )}
+
+        <div style={styles.userMenu}>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            style={styles.userButton}
+          >
+            <HugeiconsIcon
+              icon={UserCircle02Icon}
+              size={36}
+              color="#fff"
+              strokeWidth={2}
+            />
+          </button>
+
+          {isMenuOpen && (
+            <ul style={styles.subMenu}>
+              <li style={styles.subMenuItem}>Profile</li>
+              <li style={styles.subMenuItem}>Logout</li>
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   );

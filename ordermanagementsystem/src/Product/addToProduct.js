@@ -130,7 +130,7 @@ const AddToProduct = () => {
 
     try {
       const response = await axios.post(
-        "http://longhorn-rested-widely.ngrok-free.app/products",
+        "https://longhorn-rested-widely.ngrok-free.app/products",
         productData,
         {
           headers: {
