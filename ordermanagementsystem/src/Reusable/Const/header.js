@@ -4,7 +4,7 @@ import {
   UserCircle02Icon,
 } from "@hugeicons/core-free-icons/index";
 import CartIcon from "../../ConsumerOrder/cardIcon";
-import CartDropdown from "../../ConsumerOrder/cardpage";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   topBar: {
@@ -42,7 +42,7 @@ const styles = {
     borderRadius: "6px",
     border: "1px solid #ddd",
     boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
-    zIndex: 10,
+    zIndex: 1000,
     minWidth: "150px",
   },
   subMenuItem: {
@@ -61,9 +61,11 @@ const styles = {
 const Header = ({ userType }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isCustomer = userType === "consumer";
-    const [showCart, setShowCart] = useState(false);
+  const navigate = useNavigate();
 
-  const toggleCart = () => setShowCart((prev) => !prev);
+  const goToCart = () => {
+    navigate("/cart");
+  };
 
 
   return (
@@ -72,9 +74,9 @@ const Header = ({ userType }) => {
 
       <div style={styles.sideContainer}>
         {isCustomer && (
-           <div style={{ position: "relative" , top: '3px'}}>
-            <CartIcon onClick={toggleCart} itemCount={3} />
-            {showCart && <CartDropdown />}
+          <div style={{ position: "relative", top: '3px' }}>
+            <CartIcon onClick={goToCart} itemCount={3} />
+            {/* {showCart && <CartDropdown />} */}
           </div>
           /* <div style={{ cursor: "pointer", position: "relative", bottom: '-2px' }}>
             <HugeiconsIcon

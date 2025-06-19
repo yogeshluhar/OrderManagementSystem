@@ -3,6 +3,8 @@ import Header from "./header";
 import Customer from "../../Component/Customer/customer";
 import BackgroundContainer from "./backgroundContainer";
 import Ordercards from "../../Order/ordercard";
+import CardItem from "../../Product/cardItem";
+import AddToProduct from "../../Product/addToProduct";
 
 const SwitchBtn = () => {
   const [activeTab, setActiveTab] = useState("order");
@@ -75,7 +77,8 @@ const SwitchBtn = () => {
           </BackgroundContainer>
         ) : (
           <BackgroundContainer>
-            <Customer />
+            <CardItem />
+            <AddToProduct />
           </BackgroundContainer>
         )}
       </div>

@@ -6,8 +6,8 @@ import SwitchBtn from "../../Reusable/Const/switchbtn";
 const Customer = () => {
   return (
     <>
-      <CardItem />
-      <AddToProduct />
+      <Header />
+      <SwitchBtn />
     </>
   );
 };
