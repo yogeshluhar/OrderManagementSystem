@@ -8,7 +8,7 @@ import {
 
 const styles = {
   parentContainer: {
-    width: "100%",
+    // width: "100%",
     height: "30vh",
     backgroundColor: "#d9d9d9",
     borderRadius: "27px",
