@@ -19,7 +19,7 @@ const styles = {
   },
   title: {
     fontSize: "clamp(20px, 2vw, 30px)",
-    fontWeight: 600,
+    fontWeight: 'bold',
     margin: 0,
   },
   userMenu: {
@@ -70,11 +70,11 @@ const Header = ({ userType }) => {
 
   return (
     <div style={styles.topBar}>
-      <h2 style={styles.title}>Header</h2>
+      <h1 style={styles.title}>Header</h1>
 
       <div style={styles.sideContainer}>
         {isCustomer && (
-          <div style={{ position: "relative", top: '3px' }}>
+          <div style={{ position: "relative",  }}>
             <CartIcon onClick={goToCart} itemCount={3} />
             {/* {showCart && <CartDropdown />} */}
           </div>

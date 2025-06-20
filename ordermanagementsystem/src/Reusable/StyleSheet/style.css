@@ -1,5 +1,14 @@
 @media (max-width: 768px) {
-    .cardcontainer {
-      flex-direction: column;
-    }
+  .cardcontainer {
+    flex-direction: column;
   }
+  .priceBlock {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(102, 102, 102);
+    flex-direction: column;
+    gap: 10px;
+ 
+  }
+}
