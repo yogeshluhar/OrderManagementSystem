@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins";
+}
+
+.main-container {
+   
+    height: 100vh;
+    background: #8249c4;
+background: linear-gradient(90deg,rgba(130, 73, 196, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  display: flex;
+}
+
+.login-box {
+  width: 73%;
+    height: 47%;
+    border: 2px solid black;
+    border-radius: 2px;
+    margin: auto;
+    background-color: #ffffff66;
+    border: none;
+    overflow: hidden;
+    border-radius: 15px;
+    /* padding: 10px; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px;
+    display: flex
+;
+    flex-direction: column;
+}
+
+.box-title {
+         display: flex
+;
+    gap: 10px;
+    /* justify-content: space-evenly; */
+    /* align-items: center; */
+    /* margin: 6px 0 0 11px; */
+    background-color: #800000bd;
+    /* overflow: hidden; */
+    color: white;
+    padding: 9px 12px 5px 14px;
+    height: 29px;
+    align-items: center;
+}
+
+.login-details {
+         flex: 4 1;
+    display: flex
+;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0 10%;
+
+}
+
+.userpass-container{
+      flex: 1 1;
+    justify-content: end;
+    display: flex
+;
+    flex-direction: column;
+    align-items: start;
+    gap: 7px;
+}
+
+.userpass-container input, .userpass-container label {
+
+  display: block;  
+}
+
+input {
+   border: none;
+    /* border-bottom: 1px solid #000000; */
+    background: #ebebeb75;
+    color: rgba(50, 50, 50, 0.777);
+    width: 100%;
+    height: 36%;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 0px 0px 0 7px;
+    box-sizing: border-box;
+    
+}
+
+.login-name {
+  font-size: 1rem;
+}
+
+.submit {
+  flex: 2 1;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+}
+
+.username {
+        font-size: 18px;
+    font-weight: 600;
+}
+
+.password {
+      font-size: 18px;
+    font-weight: 600;
+}
+
+.submit-btn {
+      /* margin: auto; */
+    font-size: 18px;
+    width: 33%;
+    height: 40%;
+    font-weight: 700;
+    color: white;
+    background-color: #520ca6;
+    border: none;
+    border-radius: 18px;
+}
