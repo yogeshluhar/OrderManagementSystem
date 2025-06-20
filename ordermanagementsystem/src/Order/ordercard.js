@@ -75,7 +75,9 @@ const styles = {
 };
 
 export default function Ordercards({ data }) {
-  const [Expanded, setExpanded] = useState(true);
+  const [Expanded, setExpanded] = useState(false);
+
+  
 
   return (
     <>
@@ -83,7 +85,7 @@ export default function Ordercards({ data }) {
         style={{
           ...styles.parentContainer,
           height: Expanded ? "50vh" : "30vh",
-          transition: "height 0.3s ease-in-out",
+          transition: "height 0.2s ease-in-out",
         }}
       >
         <div style={styles.whitePill}>
@@ -150,6 +152,7 @@ export default function Ordercards({ data }) {
                       size={16}
                       color="#000000"
                       strokeWidth={2}
+                      style={{marginTop : '29px'}}
                     />
                   ) : (
                     <HugeiconsIcon
@@ -157,6 +160,7 @@ export default function Ordercards({ data }) {
                       size={16}
                       color="#000000"
                       strokeWidth={2}
+                      style={{marginTop : '5px'}}
                     />
                   )}
                 </span>
