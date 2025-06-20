@@ -1,11 +1,21 @@
-import "./App.css";
-import Customer from "./Component/Customer/customer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Consumer from "./Component/Consumer/consumer";
-function App() {
+import Header from "./Reusable/Const/header";
+import CardPage from './ConsumerOrder/cardpage';
+import { CartProvider } from "./ConsumerOrder/cardcontext";
 
+function App() {
   return (
     <div className="App">
-      <Consumer/>
+      <CartProvider>
+        <Router>
+          <Header userType="consumer" />
+          <Routes>
+            <Route path="/" element={<Consumer />} />
+            <Route path="/cart" element={<CardPage />} />
+          </Routes>
+        </Router>
+      </CartProvider>
     </div>
   );
 }

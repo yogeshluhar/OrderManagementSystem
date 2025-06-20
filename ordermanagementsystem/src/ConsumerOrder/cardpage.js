@@ -1,111 +1,130 @@
 import React, { useContext } from "react";
 import { CartContext } from "./cardcontext";
 import Button from "../Reusable/Const/button";
+import '../Reusable/StyleSheet/style.css'
+const CardPage = () => {
+  const { cartItems, incrementQuantity, decrementQuantity } = useContext(CartContext);
 
-const CartDropdown = () => {
-  const { cartItems, incrementQuantity, decrementQuantity } =
-    useContext(CartContext);
+  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const gst = (subtotal * 0.18).toFixed(2);
+  const total = (subtotal + parseFloat(gst)).toFixed(2);
 
   return (
-    <div style={styles.dropdown}>
-      <h2 style={styles.header}>Your Cart</h2>
-
-      <div style={styles.itemsContainer}>
-        {cartItems.length === 0 ? (
-          <div style={styles.empty}>🛒 Your cart is empty.</div>
-        ) : (
-          cartItems.map((item) => (
-            <div key={item.id} style={styles.item}>
-              <div style={styles.details}>
-                <h4 style={styles.title}>{item.title}</h4>
-                <p style={styles.desc}>{item.desc}</p>
-                <div style={styles.meta}>
-                  <span style={styles.price}>₹{item.price}</span>
-                  <span style={styles.subtotal}>
-                    Subtotal: ₹{item.price * item.quantity}
-                  </span>
+    <div style={styles.wrapper}>
+      <div style={styles.container} className="cardcontainer">
+        {/* Left - Cart Items */}
+        <div style={styles.cartSection}>
+          <h2 style={styles.sectionTitle}>My Cart</h2>
+          {cartItems.length === 0 ? (
+            <div style={styles.empty}>🛒 Your cart is empty.</div>
+          ) : (
+            cartItems.map((item) => (
+              <div key={item.id} style={styles.card}>
+                <div style={styles.details}>
+                  <h3 style={styles.title}>{item.title}</h3>
+                  <p style={styles.desc}>{item.desc}</p>
+                  <div style={styles.priceBlock}>
+                    <span>₹{item.price}</span>
+                    <span>Subtotal: ₹{item.price * item.quantity}</span>
+                  </div>
+                </div>
+                <div style={styles.controls}>
+                  <Button
+                    onClick={() => decrementQuantity(item.id)}
+                    backgroundColor="#007bff"
+                    color="#fff"
+                    borderRadius="50%"
+                    width="30px"
+                    height="30px"
+                    fontSize="18px"
+                    fontWeight="600"
+                    boxShadow="none">-</Button>
+                  <span style={styles.qty}>{item.quantity}</span>
+                  <Button
+                    onClick={() => incrementQuantity(item.id)}
+                    backgroundColor="#007bff"
+                    color="#fff"
+                    borderRadius="50%"
+                    width="30px"
+                    height="30px"
+                    fontSize="18px"
+                    fontWeight="600"
+                    boxShadow="none">+</Button>
                 </div>
               </div>
+            ))
+          )}
+        </div>
 
-              <div style={styles.controls}>
-                <Button
-                  onClick={() => decrementQuantity(item.id)}
-                  backgroundColor="#007bff"
-                  color="#fff"
-                  borderRadius="50%"
-                  width="30px"
-                  height="30px"
-                  fontSize="18px"
-                  fontWeight="600"
-                  boxShadow="none"
-                >
-                  -
-                </Button>
-                <span style={styles.qty}>{item.quantity}</span>
-                <Button
-                  onClick={() => incrementQuantity(item.id)}
-                  backgroundColor="#007bff"
-                  color="#fff"
-                  borderRadius="50%"
-                  width="30px"
-                  height="30px"
-                  fontSize="18px"
-                  fontWeight="600"
-                  boxShadow="none"
-                >
-                  +
-                </Button>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-
-      <div style={styles.total}>
-        Total: ₹
-        {cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)}
+        {/* Right - Billing Section */}
+        <div style={styles.billSection}>
+          <h2 style={styles.sectionTitle}>Price Details</h2>
+          <div style={styles.billRow}>
+            <span>Subtotal</span>
+            <span>₹{subtotal}</span>
+          </div>
+          <div style={styles.billRow}>
+            <span>GST (18%)</span>
+            <span>₹{gst}</span>
+          </div>
+          <div style={styles.totalRow}>
+            <strong>Total</strong>
+            <strong>₹{total}</strong>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 const styles = {
-  dropdown: {
-    position: "absolute",
-    top: 50,
-    right: -70,
-    width: "380px",
-    height: "100vh",
-    backgroundColor: "#fefefe",
-    borderLeft: "1px solid #e0e0e0",
-    boxShadow: "-3px 0 10px rgba(0,0,0,0.1)",
-    zIndex: 999,
+  wrapper: {
+    width: "100%",
     display: "flex",
-    flexDirection: "column",
-    padding: '10px'
+    justifyContent: "center",
+    padding: "20px",
+    boxSizing: "border-box",
   },
-  header: {
-    fontSize: "20px",
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+    width: "100%",
+    maxWidth: "1200px",
+    boxSizing: "border-box",
+    backgroundColor: "#fff",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    padding: "20px",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+  },
+  cartSection: {
+    flex: 2,
+  },
+  billSection: {
+    flex: 1,
+    backgroundColor: "#f8f9fa",
+    padding: "16px",
+    borderRadius: "6px",
+    boxSizing: "border-box",
+    height: "fit-content",
+  },
+  sectionTitle: {
+    fontSize: "22px",
     fontWeight: "700",
+    borderBottom: "2px solid #007bff",
     marginBottom: "16px",
-    color: "#222",
-    borderBottom: "1px solid #ddd",
     paddingBottom: "8px",
   },
-  itemsContainer: {
-    flex: 1,
-    overflowY: "auto",
-    paddingRight: "6px",
-  },
-  item: {
-    background: "#fff",
-    borderRadius: "10px",
-    padding: "16px",
-    marginBottom: "16px",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+  card: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    padding: "16px",
+    marginBottom: "12px",
+    background: "#f9fbff",
+    border: "1px solid #e0e0e0",
+    borderRadius: "6px",
   },
   details: {
     flex: 1,
@@ -113,48 +132,46 @@ const styles = {
   },
   title: {
     fontSize: "16px",
-    fontWeight: "600",
+    fontWeight: "700",
     marginBottom: "4px",
     color: "#333",
   },
   desc: {
     fontSize: "13px",
-    color: "#666",
+    color: "#555",
     marginBottom: "6px",
   },
-  meta: {
+  priceBlock: {
+    fontSize: "13px",
     display: "flex",
     justifyContent: "space-between",
-    fontSize: "13px",
-    color: "#444",
-  },
-  price: {
-    fontWeight: "500",
-  },
-  subtotal: {
-    fontStyle: "italic",
-    color: "#555",
+    color: "#666",
   },
   controls: {
     display: "flex",
+    gap: "10px",
     alignItems: "center",
-    gap: "8px",
   },
   qty: {
-    fontSize: "16px",
+    padding: "4px 10px",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
     fontWeight: "600",
-    width: "24px",
-    textAlign: "center",
-    color: "#222",
   },
-  total: {
+  billRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "12px",
+    fontSize: "15px",
+    color: "#444",
+  },
+  totalRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    borderTop: "2px solid #007bff",
+    paddingTop: "12px",
     fontSize: "18px",
     fontWeight: "700",
-    color: "#000",
-    borderTop: "1px solid #ccc",
-    paddingTop: "16px",
-    textAlign: "right",
-    marginTop: "10px",
   },
   empty: {
     fontSize: "16px",
@@ -164,4 +181,4 @@ const styles = {
   },
 };
 
-export default CartDropdown;
+export default CardPage;
