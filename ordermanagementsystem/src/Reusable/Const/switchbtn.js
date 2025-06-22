@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Header from "./header";
-import Customer from "../../Component/Customer/customer";
 import BackgroundContainer from "./backgroundContainer";
 import Ordercards from "../../Order/ordercard";
 import CardItem from "../../Product/cardItem";

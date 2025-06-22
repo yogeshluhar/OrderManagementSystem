@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductStatusButtons from "./statusbtn";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { CancelCircleIcon } from "@hugeicons/core-free-icons";
+import axios from "axios";
+import DeleteProductButton from "../API/deleteproductItem";
 const CardItemStyle = {
   wrapper: {
     boxSizing: "border-box",
@@ -11,13 +13,17 @@ const CardItemStyle = {
     // padding: "10px ",
     width: "100%",
     maxWidth: "1400px",
-   
+
   },
   scrollableGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
     gap: "10px",
     justifyItems: "center",
+    maxHeight: "500px",
+    overflowY: "auto",
+    borderRadius: '2rem'
+    // paddingRight: "8px",
   },
   cardContainer: {
     backgroundColor: "#fff",
@@ -65,19 +71,38 @@ const CardItemStyle = {
   },
 };
 
-const products = [
-  { id: 1, title: "Product A", desc: "A cool product", price: 10 },
-  { id: 2, title: "Product B", desc: "Even cooler", price: 15 },
-  { id: 3, title: "Product C", desc: "The coolest", price: 20 },
-  { id: 4, title: "Product D", desc: "Not bad", price: 12 },
-  { id: 5, title: "Product E", desc: "Top tier", price: 18 },
-];
+// const products = [
+//   { id: 1, title: "Product A", desc: "A cool product", price: 10 },
+//   { id: 2, title: "Product B", desc: "Even cooler", price: 15 },
+//   { id: 3, title: "Product C", desc: "The coolest", price: 20 },
+//   { id: 4, title: "Product D", desc: "Not bad", price: 12 },
+//   { id: 5, title: "Product E", desc: "Top tier", price: 18 },
+// ];
 
 const CardItem = () => {
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://violently-internal-filly.ngrok-free.app/products/", {
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "69420",
+        },
+      })
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+      });
+  }, []);
+
   return (
     <div style={CardItemStyle.wrapper}>
       <div style={CardItemStyle.scrollableGrid}>
-        {products.map((item) => (
+        {products?.map((item) => (
           <div key={item.id} style={CardItemStyle.cardContainer}>
             {/* Image + Text */}
             <div
@@ -97,10 +122,16 @@ const CardItem = () => {
                 />
               </div>
               <div style={CardItemStyle.textBox}>
-                <div style={{display: 'flex', justifyContent: 'space-between', alignContent: 'center'}}>
-                  <h4 style={CardItemStyle.title}>{item.title}</h4>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center' }}>
+                  <h4 style={CardItemStyle.title}>{item.name}</h4>
                   <div>
-                    <button
+                    <DeleteProductButton
+                      productId={item.id}
+                      onDeleteSuccess={(id) =>
+                        setProducts((prev) => prev.filter((p) => p.id !== id))
+                      }
+                    />
+                    {/* <button
                       style={{
                         background: "none",
                         border: "none",
@@ -114,10 +145,10 @@ const CardItem = () => {
                         color="red"
                         strokeWidth={2}
                       />
-                    </button>
+                    </button> */}
                   </div>
                 </div>
-                <p style={CardItemStyle.desc}>{item.desc}</p>
+                <p style={CardItemStyle.desc}>{item.category}</p>
                 <p style={CardItemStyle.price}>
                   <strong>Price:</strong> ₹{item.price}
                 </p>

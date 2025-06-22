@@ -12,3 +12,24 @@
  
   }
 }
+
+/* "sweetalert2"  */
+
+.swal2-custom-popup {
+  width: 90% !important;
+  max-width: 400px;
+  padding: 1.5rem;
+  font-size: 16px;
+}
+
+.swal2-custom-title {
+  font-size: 20px;
+  text-align: center;
+  word-break: break-word;
+}
+
+.swal2-custom-text {
+  font-size: 16px;
+  text-align: center;
+  word-break: break-word;
+}

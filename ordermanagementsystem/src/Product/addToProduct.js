@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import axios from "axios";
 import Button from "../Reusable/Const/button";
+import Swal from "sweetalert2";
+import '../Reusable/StyleSheet/style.css'
 
 const modalStyle = {
   overlay: {
@@ -24,19 +26,23 @@ const modalStyle = {
     alignItems: "center",
   },
   input: {
-    padding: "10px",
-    fontSize: "15px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
     width: "100%",
+    padding: "12px 16px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+    fontSize: "16px",
+    boxSizing: "border-box",
+    outline: "none",
   },
   textarea: {
-    padding: "10px",
-    fontSize: "15px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
-    resize: "vertical",
     width: "100%",
+    padding: "12px 16px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+    fontSize: "16px",
+    boxSizing: "border-box",
+    outline: "none",
+    resize: "vertical",
   },
   buttonsRow: {
     display: "flex",
@@ -77,10 +83,10 @@ const modalStyle = {
 const AddToProduct = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    title: "",
-    desc: "",
+    name: "",
+    category: "",
     price: "",
-    image: "",
+    shop_id: "1",
   });
   const [imageFile, setImageFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
@@ -91,7 +97,7 @@ const AddToProduct = () => {
     setIsModalOpen(false);
     setImageFile(null);
     setPreviewUrl("");
-    setFormData({ title: "", desc: "", price: "", image: "" });
+    setFormData({ name: "", category: "", price: "", shop_id: "1" });
   };
 
   const handleChange = (e) => {
@@ -125,12 +131,15 @@ const AddToProduct = () => {
 
     const productData = {
       ...formData,
-      image: uploadedImageUrl,
+      // image: uploadedImageUrl,
+      ...formData,
+      price: parseFloat(formData.price),
+      quantity: 1,
     };
 
     try {
       const response = await axios.post(
-        "https://violently-internal-filly.ngrok-free.app/products",
+        "https://violently-internal-filly.ngrok-free.app/products/",
         productData,
         {
           headers: {
@@ -140,10 +149,36 @@ const AddToProduct = () => {
         }
       );
 
-      console.log("Posted successfully:", response.data);
+      console.log("Product added:", response.data);
       closeModal();
+      await Swal.fire({
+        title: "Success!",
+        text: "✅ Product added successfully!",
+        icon: "success",
+        confirmButtonColor: "#28a745",
+        confirmButtonText: "OK",
+        timer: 2000,
+        showConfirmButton: false,
+        customClass: {
+          popup: "swal2-custom-popup",
+          title: "swal2-custom-title",
+          content: "swal2-custom-text",
+        },
+      });
+      
     } catch (err) {
-      console.error("Axios Error:", err);
+      console.error(" Error:", err);
+      Swal.fire({
+        title: "Oops!",
+        text: "❌ Failed to add product.",
+        icon: "error",
+        confirmButtonColor: "#dc3545",
+        customClass: {
+          popup: "swal2-custom-popup",
+          title: "swal2-custom-title",
+          content: "swal2-custom-text",
+        },
+      });
     }
   };
 
@@ -166,6 +201,7 @@ const AddToProduct = () => {
 
       {isModalOpen && (
         <div style={modalStyle.overlay}>
+          
           <form style={modalStyle.content} onSubmit={handleSubmit}>
             <h3 style={{ textAlign: "center", marginBottom: "10px" }}>Add New Product</h3>
 
@@ -187,19 +223,21 @@ const AddToProduct = () => {
             <input
               style={modalStyle.input}
               type="text"
-              name="title"
+              name="name"
               placeholder="Product Name"
-              value={formData.title}
+              value={formData.name}
               onChange={handleChange}
               required
             />
 
             <textarea
               style={modalStyle.textarea}
-              name="desc"
+              // style={modalStyle.input}
+              type="text"
+              name="category"
               placeholder="Description"
               rows="3"
-              value={formData.desc}
+              value={formData.category}
               onChange={handleChange}
               required
             />
@@ -246,6 +284,7 @@ const AddToProduct = () => {
           </form>
         </div>
       )}
+      
     </>
   );
 };
