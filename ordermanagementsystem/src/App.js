@@ -6,6 +6,7 @@ import { CartProvider } from "./ConsumerOrder/cardcontext";
 import Customer from "./Component/Customer/customer";
 import LoginForm from "./Login/loginForm";
 import ShopForm from "./Login/shopForm";
+import ShopUI from "./Order/shopui";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <CartProvider>
         <Router>
           {/* < ShopForm /> */}
+          {/* <ShopUI /> */}
           {/* <LoginForm /> */}
           <Customer />
           {/* <Header userType="consumer" /> */}

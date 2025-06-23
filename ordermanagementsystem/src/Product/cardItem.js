@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ProductStatusButtons from "./statusbtn";
 import axios from "axios";
 import DeleteProductButton from "../API/deleteproductItem";
-import '../Reusable/StyleSheet/style.css'
+import "../Reusable/StyleSheet/style.css";
 const CardItemStyle = {
   wrapper: {
     boxSizing: "border-box",
@@ -12,17 +12,22 @@ const CardItemStyle = {
     // padding: "10px ",
     width: "100%",
     maxWidth: "1400px",
-
+    overflowY: "auto",
+    borderRadius: "2rem",
+    flexGrow: 1,
+    maxHeight: "100vh", 
+    paddingBottom: '20vh'
   },
   scrollableGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+    gridAutoRows: "160px",
     gap: "10px",
     justifyItems: "center",
-    // maxHeight: "500px",
+    // maxHeight: "500px", // scroll height
     // overflowY: "auto",
-    // borderRadius: '2rem'
-    // paddingRight: "8px",
+    // borderRadius: "2rem",
+    // flexGrow: 1,
   },
   cardContainer: {
     backgroundColor: "#fff",
@@ -51,7 +56,7 @@ const CardItemStyle = {
     justifyContent: "center",
     gap: "8px",
     flex: 1,
-    textAlign: 'left'
+    textAlign: "left",
   },
   title: {
     fontSize: "15px",
@@ -79,7 +84,6 @@ const CardItemStyle = {
 // ];
 
 const CardItem = () => {
-
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -99,7 +103,7 @@ const CardItem = () => {
   }, []);
 
   return (
-    <div style={CardItemStyle.wrapper}>
+    <div style={CardItemStyle.wrapper} className="hide-scrollbar">
       <div style={CardItemStyle.scrollableGrid} >
         {products?.map((item) => (
           <div key={item.id} style={CardItemStyle.cardContainer}>
@@ -121,7 +125,13 @@ const CardItem = () => {
                 />
               </div>
               <div style={CardItemStyle.textBox}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center' }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignContent: "center",
+                  }}
+                >
                   <h4 style={CardItemStyle.title}>{item.name}</h4>
                   <div>
                     <DeleteProductButton

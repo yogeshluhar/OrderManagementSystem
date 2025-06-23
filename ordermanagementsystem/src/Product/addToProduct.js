@@ -2,12 +2,15 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import Button from "../Reusable/Const/button";
 import Swal from "sweetalert2";
-import '../Reusable/StyleSheet/style.css'
+import "../Reusable/StyleSheet/style.css";
 
 const modalStyle = {
   overlay: {
     position: "fixed",
-    top: 0, left: 0, right: 0, bottom: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     backgroundColor: "rgba(0,0,0,0.5)",
     display: "flex",
     justifyContent: "center",
@@ -48,7 +51,7 @@ const modalStyle = {
     display: "flex",
     justifyContent: "space-evenly",
     marginTop: "10px",
-    gap: '10px',
+    gap: "10px",
     width: "100%",
   },
   imageCircle: {
@@ -76,6 +79,8 @@ const modalStyle = {
   fixedButtonWrapper: {
     position: "fixed",
     bottom: "20px",
+    left: "50%",
+    transform: "translateX(-50%)",
     zIndex: 10000,
   },
 };
@@ -155,29 +160,39 @@ const AddToProduct = () => {
         title: "Success!",
         text: "✅ Product added successfully!",
         icon: "success",
+        iconColor: "#28a745", // Bootstrap green
         confirmButtonColor: "#28a745",
         confirmButtonText: "OK",
         timer: 2000,
         showConfirmButton: false,
+        background: "#ffffff",
+        color: "#333",
         customClass: {
           popup: "swal2-custom-popup",
           title: "swal2-custom-title",
           content: "swal2-custom-text",
+          icon: "swal2-custom-icon",
         },
+        buttonsStyling: false,
       });
-      
     } catch (err) {
       console.error(" Error:", err);
       Swal.fire({
         title: "Oops!",
         text: "❌ Failed to add product.",
         icon: "error",
+        iconColor: "#dc3545", // Bootstrap red
         confirmButtonColor: "#dc3545",
+        background: "#ffffff",
+        color: "#333",
         customClass: {
           popup: "swal2-custom-popup",
           title: "swal2-custom-title",
           content: "swal2-custom-text",
+          icon: "swal2-custom-icon",
+          confirmButton: "swal2-custom-confirm-btn",
         },
+        buttonsStyling: false,
       });
     }
   };
@@ -201,13 +216,18 @@ const AddToProduct = () => {
 
       {isModalOpen && (
         <div style={modalStyle.overlay}>
-          
           <form style={modalStyle.content} onSubmit={handleSubmit}>
-            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>Add New Product</h3>
+            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+              Add New Product
+            </h3>
 
             <div style={modalStyle.imageCircle} onClick={handleCircleClick}>
               {previewUrl ? (
-                <img src={previewUrl} alt="Preview" style={modalStyle.imageTag} />
+                <img
+                  src={previewUrl}
+                  alt="Preview"
+                  style={modalStyle.imageTag}
+                />
               ) : (
                 <span style={modalStyle.plusIcon}>+</span>
               )}
@@ -284,7 +304,6 @@ const AddToProduct = () => {
           </form>
         </div>
       )}
-      
     </>
   );
 };
