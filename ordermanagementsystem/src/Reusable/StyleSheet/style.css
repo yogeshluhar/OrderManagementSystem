@@ -57,9 +57,114 @@
 }
 
 .hide-scrollbar::-webkit-scrollbar {
+  display: none;                    /* Chrome, Safari hii */
+}
+
+/* Order */
+/* =======================
+   Base Styles (Mobile First)
+========================== */
+
+.order-card-container {
+  background-color: #d9d9d9;
+  border-radius: 27px;
+  transition: height 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+/* Default height for mobile (phones < 768px) */
+.order-card-container.collapsed {
+  height: 23vh;
+}
+
+.order-card-container.expanded {
+  height: 35vh;
+}
+
+/* SweetAlert2 (applies on all screen sizes) */
+.swal2-custom-popup {
+  width: 90% !important;
+  max-width: 400px;
+  padding: 1.5rem;
+  font-size: 16px;
+}
+
+.swal2-custom-title {
+  font-size: 20px;
+  text-align: center;
+  word-break: break-word;
+}
+
+.swal2-custom-text {
+  font-size: 16px;
+  text-align: center;
+  word-break: break-word;
+}
+
+/* Hide scrollbars on mobile (and other) views */
+.hide-scrollbar {
+  scrollbar-width: none;            /* Firefox */
+  -ms-overflow-style: none;         /* IE 10+ */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
   display: none;                    /* Chrome, Safari */
 }
 
+
+/* Arrow icons default (mobile) */
+.arrowup {
+  margin-top: 30px;
+}
+
+.arrowdown {
+  margin-top: 3px;
+}
+
+/* Responsive card layout for small screens */
+@media (max-width: 768px) {
+  .cardcontainer {
+    flex-direction: column;
+  }
+
+  .priceBlock {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(102, 102, 102);
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .arrowup {
+    margin-top: 30px;
+  }
+
+  .arrowdown {
+    margin-top: 3px;
+  }
+}
+
+/* =======================
+   Larger Screens (Tablet, Desktop)
+========================== */
+
+@media (min-width: 768px) {
+  .order-card-container.collapsed {
+    height: 28vh;
+  }
+
+  .order-card-container.expanded {
+    height: 46vh;
+  }
+
+  .arrowup {
+    margin-top: 23px;
+  }
+
+  .arrowdown {
+    margin-top: 5px;
+=======
 /* ADD TO PRODUCT  */
 
 .swal2-custom-popup {
@@ -95,5 +200,6 @@
   100% {
     transform: scale(1);
     opacity: 1;
+
   }
 }
