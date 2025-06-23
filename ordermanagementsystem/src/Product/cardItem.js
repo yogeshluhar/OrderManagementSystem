@@ -12,6 +12,11 @@ const CardItemStyle = {
     // padding: "10px ",
     width: "100%",
     maxWidth: "1400px",
+    overflowY: "auto",
+    borderRadius: "2rem",
+    flexGrow: 1,
+    maxHeight: "100vh", 
+    paddingBottom: '20vh'
   },
   scrollableGrid: {
     display: "grid",
@@ -20,9 +25,9 @@ const CardItemStyle = {
     gap: "10px",
     justifyItems: "center",
     // maxHeight: "500px", // scroll height
-    overflowY: "auto",
-    borderRadius: "2rem",
-    flexGrow: 1,
+    // overflowY: "auto",
+    // borderRadius: "2rem",
+    // flexGrow: 1,
   },
   cardContainer: {
     backgroundColor: "#fff",
@@ -98,8 +103,8 @@ const CardItem = () => {
   }, []);
 
   return (
-    <div style={CardItemStyle.wrapper}>
-      <div style={CardItemStyle.scrollableGrid} className="hide-scrollbar">
+    <div style={CardItemStyle.wrapper} className="hide-scrollbar">
+      <div style={CardItemStyle.scrollableGrid} >
         {products?.map((item) => (
           <div key={item.id} style={CardItemStyle.cardContainer}>
             {/* Image + Text */}

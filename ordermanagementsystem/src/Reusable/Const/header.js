@@ -18,7 +18,7 @@ const styles = {
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
   },
   title: {
-    fontSize: "clamp(20px, 2vw, 30px)",
+    fontSize: "clamp(1.5rem, 2vw, 2rem)",
     fontWeight: 'bold',
     margin: 0,
   },

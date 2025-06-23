@@ -13,26 +13,42 @@
   }
 }
 
-/* "sweetalert2"  */
+/* "sweetalert2" Delete Page   */
 
-.swal2-custom-popup {
-  width: 90% !important;
-  max-width: 400px;
+.custom-swal-popup {
+  border-radius: 2rem;         /* 👈 your requested value */
   padding: 1.5rem;
-  font-size: 16px;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
-.swal2-custom-title {
-  font-size: 20px;
-  text-align: center;
-  word-break: break-word;
+.custom-swal-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
-.swal2-custom-text {
-  font-size: 16px;
-  text-align: center;
-  word-break: break-word;
+.custom-swal-confirm,
+.custom-swal-cancel {
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
 }
+
+.custom-swal-confirm {
+  background-color: green;
+  color: #fff;
+  margin-right: 0.6rem;
+}
+
+.custom-swal-cancel {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
 
 /* Scroll Bar */
 .hide-scrollbar {
@@ -42,4 +58,42 @@
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;                    /* Chrome, Safari */
+}
+
+/* ADD TO PRODUCT  */
+
+.swal2-custom-popup {
+  border-radius: 2rem;
+  padding: 2rem;
+  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+.swal2-custom-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #28a745;
+  margin-bottom: 0.5rem;
+}
+
+.swal2-custom-text {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.swal2-custom-icon {
+  transform: scale(1.2);
+}
+
+/* Optional Animation */
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

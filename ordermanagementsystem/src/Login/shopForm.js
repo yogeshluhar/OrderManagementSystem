@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Button from "../Reusable/Const/button";
 
 const ShopForm = () => {
   const [formData, setFormData] = useState({
     name: "",
-    location: ""
+    location: "",
   });
 
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -56,8 +57,25 @@ const ShopForm = () => {
           required
           style={styles.input}
         />
-
-        <button type="submit" style={styles.button}>Submit</button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Button
+            backgroundColor="#007bff"
+            color="#fff"
+            width="180px"
+            height="50px"
+            fontSize="18px"
+            fontWeight="600"
+            borderRadius="3rem"
+          >
+            Submit
+          </Button>
+        </div>
 
         {message && <p style={styles.message}>{message}</p>}
       </form>
@@ -100,15 +118,7 @@ const styles = {
     outline: "none",
     boxSizing: "border-box",
   },
-  button: {
-    backgroundColor: "#7494ec",
-    color: "#fff",
-    padding: "12px",
-    border: "none",
-    borderRadius: "8px",
-    fontSize: "16px",
-    cursor: "pointer",
-  },
+
   message: {
     marginTop: "10px",
     textAlign: "center",

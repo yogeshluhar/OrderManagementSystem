@@ -160,15 +160,20 @@ const AddToProduct = () => {
         title: "Success!",
         text: "✅ Product added successfully!",
         icon: "success",
+        iconColor: "#28a745", // Bootstrap green
         confirmButtonColor: "#28a745",
         confirmButtonText: "OK",
         timer: 2000,
         showConfirmButton: false,
+        background: "#ffffff",
+        color: "#333",
         customClass: {
           popup: "swal2-custom-popup",
           title: "swal2-custom-title",
           content: "swal2-custom-text",
+          icon: "swal2-custom-icon",
         },
+        buttonsStyling: false,
       });
     } catch (err) {
       console.error(" Error:", err);
@@ -176,12 +181,18 @@ const AddToProduct = () => {
         title: "Oops!",
         text: "❌ Failed to add product.",
         icon: "error",
+        iconColor: "#dc3545", // Bootstrap red
         confirmButtonColor: "#dc3545",
+        background: "#ffffff",
+        color: "#333",
         customClass: {
           popup: "swal2-custom-popup",
           title: "swal2-custom-title",
           content: "swal2-custom-text",
+          icon: "swal2-custom-icon",
+          confirmButton: "swal2-custom-confirm-btn",
         },
+        buttonsStyling: false,
       });
     }
   };
