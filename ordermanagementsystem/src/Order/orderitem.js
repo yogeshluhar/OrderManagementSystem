@@ -17,6 +17,7 @@ export default function OrderItem() {
         <Ordercards />
         <Ordercards />
       </div>
+      {/* <div style={{ height: "20vh" }}></div> */}
     </div>
   );
 }
@@ -41,6 +42,7 @@ const styles = {
     borderRadius: "2rem",
     flexGrow: 1,
     maxHeight: "100vh",
-    paddingBottom: "20vh",
+    // marginBottom: '20vh'
+    paddingBottom: '30vh' 
   },
 };
