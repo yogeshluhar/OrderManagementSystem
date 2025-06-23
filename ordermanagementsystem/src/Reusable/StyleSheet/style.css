@@ -13,8 +13,43 @@ body {
     color: rgb(102, 102, 102);
     flex-direction: column;
     gap: 10px;
- 
   }
+}
+
+/* "sweetalert2" Delete Page   */
+
+.custom-swal-popup {
+  border-radius: 2rem; /* 👈 your requested value */
+  padding: 1.5rem;
+  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.custom-swal-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.custom-swal-confirm,
+.custom-swal-cancel {
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.custom-swal-confirm {
+  background-color: green;
+  color: #fff;
+  margin-right: 0.6rem;
+}
+
+.custom-swal-cancel {
+  background-color: #e74c3c;
+  color: #fff;
 }
 
 /* "sweetalert2"  */
@@ -40,12 +75,12 @@ body {
 
 /* Scroll Bar */
 .hide-scrollbar {
-  scrollbar-width: none;            /* Firefox */
-  -ms-overflow-style: none;         /* IE 10+ */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none;                    /* Chrome, Safari */
+  display: none; /* Chrome, Safari */
 }
 
 /* Order */
@@ -91,12 +126,12 @@ body {
 
 /* Hide scrollbars on mobile (and other) views */
 .hide-scrollbar {
-  scrollbar-width: none;            /* Firefox */
-  -ms-overflow-style: none;         /* IE 10+ */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none;                    /* Chrome, Safari */
+  display: none; /* Chrome, Safari */
 }
 
 /* Arrow icons default (mobile) */
