@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import ProductStatusButtons from "./statusbtn";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { CancelCircleIcon } from "@hugeicons/core-free-icons";
 import axios from "axios";
 import DeleteProductButton from "../API/deleteproductItem";
+import '../Reusable/StyleSheet/style.css'
 const CardItemStyle = {
   wrapper: {
     boxSizing: "border-box",
@@ -101,7 +100,7 @@ const CardItem = () => {
 
   return (
     <div style={CardItemStyle.wrapper}>
-      <div style={CardItemStyle.scrollableGrid}>
+      <div style={CardItemStyle.scrollableGrid} className="hide-scrollbar">
         {products?.map((item) => (
           <div key={item.id} style={CardItemStyle.cardContainer}>
             {/* Image + Text */}

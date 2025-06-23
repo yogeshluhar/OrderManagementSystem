@@ -13,7 +13,7 @@ function App() {
 
       <CartProvider>
         <Router>
-          < ShopForm />
+          {/* < ShopForm /> */}
           {/* <LoginForm /> */}
           <Customer />
           {/* <Header userType="consumer" /> */}
