@@ -3,19 +3,27 @@ import Consumer from "./Component/Consumer/consumer";
 import Header from "./Reusable/Const/header";
 import CardPage from './ConsumerOrder/cardpage';
 import { CartProvider } from "./ConsumerOrder/cardcontext";
+import Customer from "./Component/Customer/customer";
+import LoginForm from "./Login/loginForm";
+import ShopForm from "./Login/shopForm";
 
 function App() {
   return (
     <div className="App">
+
       <CartProvider>
         <Router>
-          <Header userType="consumer" />
+          {/* < ShopForm /> */}
+          {/* <LoginForm /> */}
+          <Customer />
+          {/* <Header userType="consumer" /> */}
           <Routes>
-            <Route path="/" element={<Consumer />} />
+            {/* <Route path="/" element={<Consumer />} /> */}
             <Route path="/cart" element={<CardPage />} />
           </Routes>
         </Router>
       </CartProvider>
+
     </div>
   );
 }

@@ -1,17 +1,36 @@
 import React, { useContext } from "react";
 import { CartContext } from "./cardcontext";
 import Button from "../Reusable/Const/button";
-import '../Reusable/StyleSheet/style.css'
+import "../Reusable/StyleSheet/style.css";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { ArrowLeft02Icon } from "@hugeicons/core-free-icons";
+import { useNavigate } from "react-router-dom";
 const CardPage = () => {
-  const { cartItems, incrementQuantity, decrementQuantity } = useContext(CartContext);
+  const { cartItems, incrementQuantity, decrementQuantity } =
+    useContext(CartContext);
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
   const gst = (subtotal * 0.18).toFixed(2);
   const total = (subtotal + parseFloat(gst)).toFixed(2);
 
+  const navigate = useNavigate();
+
   return (
     <div style={styles.wrapper}>
+      
       <div style={styles.container} className="cardcontainer">
+      <div onClick={() => navigate(-1)}>
+        <HugeiconsIcon
+          icon={ArrowLeft02Icon}
+          size={24}
+          color="#000000"
+          strokeWidth={2}
+          style={styles.backIcon}
+        />
+      </div>
         {/* Left - Cart Items */}
         <div style={styles.cartSection}>
           <h2 style={styles.sectionTitle}>My Cart</h2>
@@ -23,9 +42,9 @@ const CardPage = () => {
                 <div style={styles.details}>
                   <h3 style={styles.title}>{item.title}</h3>
                   <p style={styles.desc}>{item.desc}</p>
-                  <div style={styles.priceBlock}>
+                  <div style={styles.priceBlock} className="priceBlock">
                     <span>₹{item.price}</span>
-                    <span>Subtotal: ₹{item.price * item.quantity}</span>
+                    <span style={{fontWeight: 'bold'}}>Subtotal: ₹{item.price * item.quantity}</span>
                   </div>
                 </div>
                 <div style={styles.controls}>
@@ -38,7 +57,10 @@ const CardPage = () => {
                     height="30px"
                     fontSize="18px"
                     fontWeight="600"
-                    boxShadow="none">-</Button>
+                    boxShadow="none"
+                  >
+                    -
+                  </Button>
                   <span style={styles.qty}>{item.quantity}</span>
                   <Button
                     onClick={() => incrementQuantity(item.id)}
@@ -49,7 +71,10 @@ const CardPage = () => {
                     height="30px"
                     fontSize="18px"
                     fontWeight="600"
-                    boxShadow="none">+</Button>
+                    boxShadow="none"
+                  >
+                    +
+                  </Button>
                 </div>
               </div>
             ))
@@ -98,6 +123,13 @@ const styles = {
     padding: "20px",
     boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
   },
+  backIcon: {
+    cursor: "pointer",
+    padding: "8px",
+    borderRadius: "50%",
+    backgroundColor: "#f2f2f2",
+    transition: "background-color 0.3s ease",
+  },
   cartSection: {
     flex: 2,
   },
@@ -110,6 +142,7 @@ const styles = {
     height: "fit-content",
   },
   sectionTitle: {
+    margin: "0",
     fontSize: "22px",
     fontWeight: "700",
     borderBottom: "2px solid #007bff",

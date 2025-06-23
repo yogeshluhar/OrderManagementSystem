@@ -1,5 +1,45 @@
 @media (max-width: 768px) {
-    .cardcontainer {
-      flex-direction: column;
-    }
+  .cardcontainer {
+    flex-direction: column;
   }
+  .priceBlock {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(102, 102, 102);
+    flex-direction: column;
+    gap: 10px;
+ 
+  }
+}
+
+/* "sweetalert2"  */
+
+.swal2-custom-popup {
+  width: 90% !important;
+  max-width: 400px;
+  padding: 1.5rem;
+  font-size: 16px;
+}
+
+.swal2-custom-title {
+  font-size: 20px;
+  text-align: center;
+  word-break: break-word;
+}
+
+.swal2-custom-text {
+  font-size: 16px;
+  text-align: center;
+  word-break: break-word;
+}
+
+/* Scroll Bar */
+.hide-scrollbar {
+  scrollbar-width: none;            /* Firefox */
+  -ms-overflow-style: none;         /* IE 10+ */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;                    /* Chrome, Safari */
+}

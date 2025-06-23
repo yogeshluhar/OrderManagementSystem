@@ -1,7 +1,7 @@
 const styles = {
   bgContainer: {
     backgroundColor: "#d9e6ff",
-    // minHeight: "100vh",
+    minHeight: "100%",
     margin: "10px 10px 0 10px",
     borderTopLeftRadius: "2rem",
     borderTopRightRadius: "2rem",
