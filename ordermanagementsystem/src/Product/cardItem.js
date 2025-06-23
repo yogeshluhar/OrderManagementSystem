@@ -16,7 +16,7 @@ const CardItemStyle = {
     borderRadius: "2rem",
     flexGrow: 1,
     maxHeight: "100vh", 
-    paddingBottom: '20vh'
+    paddingBottom: '40vh'
   },
   scrollableGrid: {
     display: "grid",
