@@ -3,6 +3,7 @@ import BackgroundContainer from "./backgroundContainer";
 import Ordercards from "../../Order/ordercard";
 import CardItem from "../../Product/cardItem";
 import AddToProduct from "../../Product/addToProduct";
+import OrderItem from "../../Order/orderitem";
 
 const SwitchBtn = () => {
   const [activeTab, setActiveTab] = useState("order");
@@ -71,7 +72,7 @@ const SwitchBtn = () => {
       <div style={{ textAlign: "center", marginTop: "20px", fontSize: "18px" }}>
         {activeTab === "order" ? (
           <BackgroundContainer>
-            <Ordercards />
+            <OrderItem />
           </BackgroundContainer>
         ) : (
           <BackgroundContainer>

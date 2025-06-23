@@ -2,23 +2,21 @@ import Ordercards from "./ordercard";
 
 export default function OrderItem() {
   return (
-    <div style={styles.gridContainer}>
-      
-    <div style={styles.grid}>
-      <Ordercards />
-      <Ordercards />
-      <Ordercards />
-      <Ordercards />
-      <Ordercards />
-      <Ordercards />
-      <Ordercards />
-      <Ordercards />
-       <Ordercards />
-      <Ordercards />
-      <Ordercards />
-      <Ordercards />
-     
-    </div>
+    <div style={styles.gridContainer}  className="hide-scrollbar">
+      <div style={styles.grid}>
+        <Ordercards />
+        <Ordercards />
+        <Ordercards />
+        <Ordercards />
+        <Ordercards />
+        <Ordercards />
+        <Ordercards />
+        <Ordercards />
+        <Ordercards />
+        <Ordercards />
+        <Ordercards />
+        <Ordercards />
+      </div>
     </div>
   );
 }
@@ -31,11 +29,18 @@ const styles = {
     alignItems: "start",
     gridAutoRows: "min-content", // ← important
     width: "100%",
-   
   },
-  
+
   gridContainer: {
-    paddingBottom: '20vh'
-  }
-  
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+    // padding: "10px ",
+    maxWidth: "1400px",
+    overflowY: "auto",
+    borderRadius: "2rem",
+    flexGrow: 1,
+    maxHeight: "100vh",
+    paddingBottom: "20vh",
+  },
 };
