@@ -5,6 +5,7 @@ import {
   ArrowDownDoubleIcon,
   ArrowUpDoubleIcon,
 } from "@hugeicons/core-free-icons";
+import '../Reusable/StyleSheet/style.css';
 
 const styles = {
   parentContainer: {
@@ -82,11 +83,7 @@ export default function Ordercards({ data }) {
   return (
     <>
       <div
-        style={{
-          ...styles.parentContainer,
-          height: Expanded ? "50vh" : "30vh",
-          transition: "height 0.2s ease-in-out",
-        }}
+        className={`order-card-container ${Expanded ? "expanded" : "collapsed"}`}
       >
         <div style={styles.whitePill}>
           <div style={styles.orderType}>Takeaway</div>
@@ -152,7 +149,7 @@ export default function Ordercards({ data }) {
                       size={16}
                       color="#000000"
                       strokeWidth={2}
-                      style={{marginTop : '29px'}}
+                      className="arrowup"
                     />
                   ) : (
                     <HugeiconsIcon
@@ -160,7 +157,7 @@ export default function Ordercards({ data }) {
                       size={16}
                       color="#000000"
                       strokeWidth={2}
-                      style={{marginTop : '5px'}}
+                      className="arrowdown"
                     />
                   )}
                 </span>
