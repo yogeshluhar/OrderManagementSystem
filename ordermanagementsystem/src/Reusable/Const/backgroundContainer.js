@@ -1,15 +1,15 @@
 const styles = {
   bgContainer: {
     backgroundColor: "#d9e6ff",
-    // minHeight: "100%",
-    maxHeight: '100vh',
+    height: '100vh',
+    // maxHeight: '100vh',
     margin: "10px 10px 0 10px",
     borderTopLeftRadius: "2rem",
     borderTopRightRadius: "2rem",
     display: "flex",
     justifyContent: "center", 
     padding: '10px',
-    overflowY: "auto", 
+    // overflowY: "auto", 
   },
   // innerContainer: {
   //   width: "100%",

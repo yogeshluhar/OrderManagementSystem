@@ -75,7 +75,7 @@ const SwitchBtn = () => {
           </BackgroundContainer>
         ) : (
           <BackgroundContainer>
-            <CardItem />
+            <><CardItem /></>
             <AddToProduct />
           </BackgroundContainer>
         )}
