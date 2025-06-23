@@ -19,9 +19,9 @@ const CardItemStyle = {
     gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
     gap: "10px",
     justifyItems: "center",
-    maxHeight: "500px",
-    overflowY: "auto",
-    borderRadius: '2rem'
+    // maxHeight: "500px",
+    // overflowY: "auto",
+    // borderRadius: '2rem'
     // paddingRight: "8px",
   },
   cardContainer: {
@@ -100,7 +100,7 @@ const CardItem = () => {
 
   return (
     <div style={CardItemStyle.wrapper}>
-      <div style={CardItemStyle.scrollableGrid} className="hide-scrollbar">
+      <div style={CardItemStyle.scrollableGrid} >
         {products?.map((item) => (
           <div key={item.id} style={CardItemStyle.cardContainer}>
             {/* Image + Text */}
