@@ -96,13 +96,13 @@ body {
 }
 
 /* Default height for mobile (phones < 768px) */
-.order-card-container.collapsed {
+/* .order-card-container.collapsed {
   height: 23vh;
 }
 
 .order-card-container.expanded {
   height: 35vh;
-}
+} */
 
 /* SweetAlert2 (applies on all screen sizes) */
 .swal2-custom-popup {
@@ -172,13 +172,13 @@ body {
 ========================== */
 
 @media (min-width: 768px) {
-  .order-card-container.collapsed {
+  /* .order-card-container.collapsed {
     height: 28vh;
   }
 
   .order-card-container.expanded {
     height: 46vh;
-  }
+  } */
 
   .arrowup {
     margin-top: 23px;

@@ -74,9 +74,9 @@ const ItemCard = ({ item }) => {
               alignItems: "center",
             }}
           >
-            <h4 style={CardItemStyle.title}>{item.title}</h4>
+            <h4 style={CardItemStyle.title}>{item.name}</h4>
           </div>
-          <p style={CardItemStyle.desc}>{item.desc}</p>
+          <p style={CardItemStyle.desc}>{item.category}</p>
           <p style={CardItemStyle.price}>
             <strong>Price:</strong> ₹{item.price}
           </p>
