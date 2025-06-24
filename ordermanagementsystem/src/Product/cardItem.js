@@ -3,6 +3,7 @@ import ProductStatusButtons from "./statusbtn";
 import axios from "axios";
 import DeleteProductButton from "../API/deleteproductItem";
 import "../Reusable/StyleSheet/style.css";
+import EditProductModal from "../API/editiProductButton";
 const CardItemStyle = {
   wrapper: {
     boxSizing: "border-box",
@@ -15,13 +16,13 @@ const CardItemStyle = {
     overflowY: "auto",
     borderRadius: "2rem",
     flexGrow: 1,
-    maxHeight: "100vh", 
-    paddingBottom: '40vh'
+    maxHeight: "100vh",
+    paddingBottom: "40vh",
   },
   scrollableGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-    gridAutoRows: "160px",
+    // gridAutoRows: "160px",
     gap: "10px",
     justifyItems: "center",
     // maxHeight: "500px", // scroll height
@@ -41,6 +42,7 @@ const CardItemStyle = {
     maxWidth: "100%",
     boxSizing: "border-box",
     position: "relative",
+    justifyContent: "space-between",
   },
   imageBox: {
     width: "80px",
@@ -85,6 +87,8 @@ const CardItemStyle = {
 
 const CardItem = () => {
   const [products, setProducts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     axios
@@ -102,77 +106,105 @@ const CardItem = () => {
       });
   }, []);
 
+  const handleEditClick = (product) => {
+    setSelectedProduct(product);
+    setShowModal(true);
+  };
+
   return (
     <div style={CardItemStyle.wrapper} className="hide-scrollbar">
-      <div style={CardItemStyle.scrollableGrid} >
-        {products?.map((item) => (
-          <div key={item.id} style={CardItemStyle.cardContainer}>
-            {/* Image + Text */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                gap: "16px",
-                alignItems: "center",
-                width: "100%",
-              }}
-            >
-              <div style={CardItemStyle.imageBox}>
-                <img
-                  src="https://www.wholeheartedeats.com/wp-content/uploads/2023/12/Baked-Samosas.jpg"
-                  alt={item.title}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              </div>
-              <div style={CardItemStyle.textBox}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignContent: "center",
-                  }}
-                >
-                  <h4 style={CardItemStyle.title}>{item.name}</h4>
-                  <div>
-                    <DeleteProductButton
-                      productId={item.id}
-                      onDeleteSuccess={(id) =>
-                        setProducts((prev) => prev.filter((p) => p.id !== id))
-                      }
-                    />
-                    {/* <button
-                      style={{
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                      }}
-                      title="Delete"
-                    >
-                      <HugeiconsIcon
-                        icon={CancelCircleIcon}
-                        size={20}
-                        color="red"
-                        strokeWidth={2}
-                      />
-                    </button> */}
-                  </div>
+      <div style={CardItemStyle.scrollableGrid}>
+        {products?.map((item) => {
+          return (
+            <div key={item.id} style={CardItemStyle.cardContainer}>
+              {/* Image + Text */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  gap: "16px",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <div style={CardItemStyle.imageBox}>
+                  <img
+                    src="https://www.wholeheartedeats.com/wp-content/uploads/2023/12/Baked-Samosas.jpg"
+                    alt={item.title}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
                 </div>
-                <p style={CardItemStyle.desc}>{item.category}</p>
-                <p style={CardItemStyle.price}>
-                  <strong>Price:</strong> ₹{item.price}
-                </p>
+                <div style={CardItemStyle.textBox}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignContent: "center",
+                    }}
+                  >
+                    <h4 style={CardItemStyle.title}>{item.name}</h4>
+                    <div>
+                      <DeleteProductButton
+                        productId={item.id}
+                        onDeleteSuccess={(id) =>
+                          setProducts((prev) => prev.filter((p) => p.id !== id))
+                        }
+                      />
+                      {/* <button
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+              }}
+              title="Delete"
+            >
+              <HugeiconsIcon
+                icon={CancelCircleIcon}
+                size={20}
+                color="red"
+                strokeWidth={2}
+              />
+            </button> */}
+                    </div>
+                  </div>
+                  <p style={CardItemStyle.desc}>{item.category}</p>
+                  <p style={CardItemStyle.price}>
+                    <strong>Price:</strong> ₹{item.price}
+                  </p>
+                </div>
               </div>
-            </div>
 
-            {/* Status Buttons below */}
-            <div style={{ width: "100%" }}>
-              <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                <ProductStatusButtons />
+              {/* Status Buttons below */}
+              <div style={{ width: "100%" }}>
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                  {/* <ProductStatusButtons /> */}
+                  <ProductStatusButtons
+                    product={item}
+                    onEditClick={() => handleEditClick(item)}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
+
+      <EditProductModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        initialData={selectedProduct}
+        onUpdateSuccess={(updatedProduct) => {
+          setProducts((prevProducts) =>
+            prevProducts.map((item) =>
+              item.id === updatedProduct.id ? updatedProduct : item
+            )
+          );
+        }}
+      />
     </div>
   );
 };

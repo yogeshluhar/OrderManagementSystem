@@ -1,16 +1,9 @@
 import { useState } from "react";
 import Button from "../Reusable/Const/button";
 
-const ProductStatusButtons = () => {
+const ProductStatusButtons = ({ product, onEditClick }) => {
   const [isAvailable, setIsAvailable] = useState(true);
-
-  const toggleAvailability = () => {
-    setIsAvailable((prev) => !prev);
-  };
-
-  const handleEdit = () => {
-    console.log("Edit clicked");
-  };
+  const toggleAvailability = () => setIsAvailable((prev) => !prev);
 
   return (
     <div style={{ display: "flex", gap: "5px" }}>
@@ -24,12 +17,11 @@ const ProductStatusButtons = () => {
         fontWeight="600"
         borderRadius="20px"
         boxShadow="0"
-        // flex={1}
       >
         {isAvailable ? "Available" : "Unavailable"}
       </Button>
       <Button
-        onClick={handleEdit}
+        onClick={onEditClick}
         backgroundColor="#007bff"
         color="#fff"
         width="80px"
@@ -38,7 +30,6 @@ const ProductStatusButtons = () => {
         fontWeight="600"
         boxShadow="0"
         borderRadius="20px"
-        // flex={1}
       >
         Edit
       </Button>
