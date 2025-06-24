@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "../Reusable/Const/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -73,12 +73,87 @@ const styles = {
     backgroundColor: "transparent",
     marginTop: "1px",
   },
+
+    timerText: {
+    fontSize: "14px",
+    padding: '0 5px',
+    color: "red",
+    textAlign: "center",
+    fontWeight: "bold",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "7vh",
+    borderRadius: "17px",
+    border: "1px dashed red",
+    backgroundColor: "#fff0f0",
+    flex: '1',
+    boxShadow: ' 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    boxSizing: 'border-box'
+  },
 };
 
 export default function Ordercards({ data }) {
   const [Expanded, setExpanded] = useState(false);
+  const [decision, setDecision] = useState(null);
+  const [timeLeft, setTimeLeft] = useState(180);
+  const [showTimerInsteadOfReject, setShowTimerInsteadOfReject] = useState(false);
 
-  
+  const timeoutRef = useRef(null);
+  const intervalRef = useRef(null);
+  const timerSwapRef = useRef(null);
+
+  useEffect(() => {
+    // Countdown timer (1 sec)
+    intervalRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(intervalRef.current);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    // Final auto-reject after 3 minutes
+    timeoutRef.current = setTimeout(() => {
+      handleReject();
+    }, 180000);
+
+    // Every 5 seconds, show timer instead of button for 1 second
+    timerSwapRef.current = setInterval(() => {
+      setShowTimerInsteadOfReject(true);
+      setTimeout(() => setShowTimerInsteadOfReject(false), 1000);
+    }, 5000);
+
+    return () => {
+      clearInterval(intervalRef.current);
+      clearTimeout(timeoutRef.current);
+      clearInterval(timerSwapRef.current);
+    };
+  }, []);
+
+  const handleAccept = () => {
+    setDecision("accept");
+    clearTimeout(timeoutRef.current);
+    clearInterval(intervalRef.current);
+    clearInterval(timerSwapRef.current);
+  };
+
+  const handleReject = () => {
+    setDecision("reject");
+    clearTimeout(timeoutRef.current);
+    clearInterval(intervalRef.current);
+    clearInterval(timerSwapRef.current);
+  };
+
+  const formatTime = (seconds) => {
+    const min = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const sec = (seconds % 60).toString().padStart(2, "0");
+    return `${min}:${sec}`;
+  }; 
 
   return (
     <>
@@ -108,19 +183,37 @@ export default function Ordercards({ data }) {
               borderRadius={"17px"}
               height={"7vh"}
               backgroundColor={" #2dff2d"}
+              onClick={handleAccept}
             >
               Accept
             </Button>
-            <Button
-              flex={1}
-              fontSize={"medium"}
-              fontWeight={"bold"}
-              borderRadius={"17px"}
-              height={"7vh"}
-              backgroundColor={"red"}
-            >
-              Reject
-            </Button>
+            {decision ? (
+              <Button
+                flex={1}
+                fontSize={"medium"}
+                fontWeight={"bold"}
+                borderRadius={"17px"}
+                height={"7vh"}
+                backgroundColor={"red"}
+                disabled
+              >
+                Reject
+              </Button>
+            ) : showTimerInsteadOfReject ? (
+              <div style={styles.timerText}> Auto Reject in {formatTime(timeLeft)}</div>
+            ) : (
+              <Button
+                flex={1}
+                fontSize={"medium"}
+                fontWeight={"bold"}
+                borderRadius={"17px"}
+                height={"7vh"}
+                backgroundColor={"red"}
+                onClick={handleReject}
+              >
+                Reject
+              </Button>
+            )}
           </div>
         </div>
 
