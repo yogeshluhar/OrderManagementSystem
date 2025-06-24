@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "../Reusable/Const/button";
 import Swal from "sweetalert2";
 import axios from "axios";
-
+import '../Reusable/StyleSheet/style.css'
 const modalStyle = {
   overlay: {
     position: "fixed",
@@ -112,8 +112,16 @@ const EditProductModal = ({
         confirmButtonColor: "#28a745",
         timer: 1500,
         showConfirmButton: false,
+        background: "#ffffff",
+        color: "#333",
+        customClass: {
+          popup: "swal2-custom-popup",
+          title: "swal2-custom-title",
+          content: "swal2-custom-text",
+          icon: "swal2-custom-icon",
+        },
+        buttonsStyling: false,
       });
-
       if (typeof onUpdateSuccess === "function") {
         onUpdateSuccess(response.data);
       }
@@ -126,6 +134,16 @@ const EditProductModal = ({
         text: "❌ Failed to update product.",
         icon: "error",
         confirmButtonColor: "#dc3545",
+        background: "#ffffff",
+        color: "#333",
+        customClass: {
+          popup: "swal2-custom-popup",
+          title: "swal2-custom-title",
+          content: "swal2-custom-text",
+          icon: "swal2-custom-icon",
+          confirmButton: "swal2-custom-confirm-btn",
+        },
+        buttonsStyling: false,
       });
     }
   };

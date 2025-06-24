@@ -52,7 +52,7 @@ body {
   color: #fff;
 }
 
-/* "sweetalert2"  */
+/* "sweetalert2" 
 
 .swal2-custom-popup {
   width: 90% !important;
@@ -71,7 +71,7 @@ body {
   font-size: 16px;
   text-align: center;
   word-break: break-word;
-}
+} */
 
 /* Scroll Bar */
 .hide-scrollbar {
@@ -104,25 +104,6 @@ body {
   height: 35vh;
 } */
 
-/* SweetAlert2 (applies on all screen sizes) */
-.swal2-custom-popup {
-  width: 90% !important;
-  max-width: 400px;
-  padding: 1.5rem;
-  font-size: 16px;
-}
-
-.swal2-custom-title {
-  font-size: 20px;
-  text-align: center;
-  word-break: break-word;
-}
-
-.swal2-custom-text {
-  font-size: 16px;
-  text-align: center;
-  word-break: break-word;
-}
 
 /* Hide scrollbars on mobile (and other) views */
 .hide-scrollbar {
@@ -186,5 +167,83 @@ body {
 
   .arrowdown {
     margin-top: 5px;
+  }
+}
+
+
+
+/* SweetAlert2 Custom Popup Styling */
+.swal2-custom-popup {
+  width: 90% !important;
+  max-width: 400px;
+  padding: 2rem;
+  font-size: 16px;
+  border-radius: 2rem;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Title Styling */
+.swal2-custom-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+  word-break: break-word;
+}
+
+/* Content Text Styling */
+.swal2-custom-text {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 16px;
+  text-align: center;
+  word-break: break-word;
+  line-height: 1.5;
+  width: 100%;
+}
+
+/* Icon Styling (success/info/error) */
+.swal2-custom-icon {
+  border-radius: 50%;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2); /* subtle green shadow for success */
+}
+
+/* Confirm Button Styling */
+.swal2-confirm {
+  padding: 12px 28px;
+  border-radius: 2rem;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #28a745 !important;
+  color: #fff !important;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.swal2-confirm:hover {
+  background-color: #218838 !important;
+}
+
+/* Responsive adjustments for smaller devices */
+@media (max-width: 480px) {
+  .swal2-custom-popup {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+  }
+
+  .swal2-custom-title {
+    font-size: 20px;
+  }
+
+  .swal2-custom-text {
+    font-size: 14px;
+    width: 100%;
   }
 }

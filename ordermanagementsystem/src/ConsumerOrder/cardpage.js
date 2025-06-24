@@ -20,17 +20,16 @@ const CardPage = () => {
 
   return (
     <div style={styles.wrapper}>
-      
       <div style={styles.container} className="cardcontainer">
-      <div onClick={() => navigate(-1)}>
-        <HugeiconsIcon
-          icon={ArrowLeft02Icon}
-          size={24}
-          color="#000000"
-          strokeWidth={2}
-          style={styles.backIcon}
-        />
-      </div>
+        <div onClick={() => navigate(-1)}>
+          <HugeiconsIcon
+            icon={ArrowLeft02Icon}
+            size={24}
+            color="#000000"
+            strokeWidth={2}
+            style={styles.backIcon}
+          />
+        </div>
         {/* Left - Cart Items */}
         <div style={styles.cartSection}>
           <h2 style={styles.sectionTitle}>My Cart</h2>
@@ -44,7 +43,9 @@ const CardPage = () => {
                   <p style={styles.desc}>{item.category}</p>
                   <div style={styles.priceBlock} className="priceBlock">
                     <span>₹{item.price}</span>
-                    <span style={{fontWeight: 'bold'}}>Subtotal: ₹{item.price * item.quantity}</span>
+                    <span style={{ fontWeight: "bold" }}>
+                      Subtotal: ₹{item.price * item.quantity}
+                    </span>
                   </div>
                 </div>
                 <div style={styles.controls}>
@@ -103,13 +104,26 @@ const CardPage = () => {
 };
 
 const styles = {
+  // wrapper: {
+  //   // width: "100%",
+  //   // display: "flex",
+  //   // justifyContent: "center",
+  //   // padding: "20px",
+  //   // boxSizing: "border-box",
+
+  // },
   wrapper: {
     width: "100%",
+    height: "100vh",
     display: "flex",
     justifyContent: "center",
+    alignItems: "flex-start",
     padding: "20px",
     boxSizing: "border-box",
+    overflowY: "auto",
+    backgroundColor: "#f5f5f5",
   },
+
   container: {
     display: "flex",
     flexWrap: "wrap",

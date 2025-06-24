@@ -156,17 +156,16 @@ const AddToProduct = () => {
 
       console.log("Product added:", response.data);
       closeModal();
-      await Swal.fire({
+      Swal.fire({
         title: "Success!",
         text: "✅ Product added successfully!",
         icon: "success",
-        iconColor: "#28a745", // Bootstrap green
+        iconColor: "#28a745",
         confirmButtonColor: "#28a745",
         confirmButtonText: "OK",
-        timer: 2000,
-        showConfirmButton: false,
         background: "#ffffff",
         color: "#333",
+        showConfirmButton: true,
         customClass: {
           popup: "swal2-custom-popup",
           title: "swal2-custom-title",

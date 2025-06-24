@@ -10,7 +10,7 @@ import axios from "axios";
 // ];
 
 const ItemList = () => {
-   const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios
@@ -29,26 +29,44 @@ const ItemList = () => {
   }, []);
 
   return (
-    <div style={styles.grid}>
-      {products.map((item) => (
-        <ItemCard key={item.id} item={item} />
-      ))}
-    </div>
+    <>
+      <div style={styles.gridContainer} className="hide-scrollbar">
+        <div style={styles.grid}>
+          {products.map((item) => (
+            <ItemCard key={item.id} item={item} />
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 
 const styles = {
-   grid: {
+  grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-    gridTemplateRows: '',
+    gridTemplateRows: "",
     gap: "16px",
     // padding: "15px 5px",
     // backgroundColor: "#f9f9f9",
     width: "100%",
-    alignItems: 'start',
-    justifyItems: 'center',
-     gridAutoRows: "min-content", 
+    alignItems: "start",
+    justifyItems: "center",
+    gridAutoRows: "min-content",
+  },
+  gridContainer: {
+    boxSizing: "border-box",
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+    // padding: "10px ",
+    width: "100%",
+    // maxWidth: "1400px",
+    overflowY: "auto",
+    borderRadius: "2rem",
+    flexGrow: 1,
+    maxHeight: "100vh",
+    paddingBottom: "40vh",
   },
 };
 
