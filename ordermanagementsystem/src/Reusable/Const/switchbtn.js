@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import BackgroundContainer from "./backgroundContainer";
-import Ordercards from "../../Order/ordercard";
 import CardItem from "../../Product/cardItem";
 import AddToProduct from "../../Product/addToProduct";
 import OrderItem from "../../Order/orderitem";

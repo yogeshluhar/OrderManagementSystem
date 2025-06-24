@@ -11,7 +11,7 @@ const CardItemStyle = {
     gap: "16px",
     // padding: "10px ",
     width: "100%",
-    maxWidth: "1400px",
+    // maxWidth: "1400px",
     overflowY: "auto",
     borderRadius: "2rem",
     flexGrow: 1,

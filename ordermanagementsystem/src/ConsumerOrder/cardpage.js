@@ -40,8 +40,8 @@ const CardPage = () => {
             cartItems.map((item) => (
               <div key={item.id} style={styles.card}>
                 <div style={styles.details}>
-                  <h3 style={styles.title}>{item.title}</h3>
-                  <p style={styles.desc}>{item.desc}</p>
+                  <h3 style={styles.title}>{item.name}</h3>
+                  <p style={styles.desc}>{item.category}</p>
                   <div style={styles.priceBlock} className="priceBlock">
                     <span>₹{item.price}</span>
                     <span style={{fontWeight: 'bold'}}>Subtotal: ₹{item.price * item.quantity}</span>
