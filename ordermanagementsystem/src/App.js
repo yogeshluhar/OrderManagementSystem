@@ -14,13 +14,13 @@ function App() {
 
       <CartProvider>
         <Router>
-          {/* <ShopForm /> */}
-          {/* <ShopUI /> */}
           {/* <LoginForm /> */}
           {/* <Customer /> */}
-          <Header userType="consumer" />
+          {/* <Header userType="consumer" /> */}
           <Routes>
-            <Route path="/" element={<Consumer />} />
+            {/* <Route path="/" element={<Customer />} /> */}
+            {/* <Route path="/" element={<ShopForm />} /> */}
+            {/* <Route path="/shopui" element={<ShopUI />} /> */}
             <Route path="/cart" element={<CardPage />} />
           </Routes>
         </Router>

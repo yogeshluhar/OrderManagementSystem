@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
-import axios from "axios";
 import Button from "../Reusable/Const/button";
 import Swal from "sweetalert2";
 import "../Reusable/StyleSheet/style.css";
+import { useAddProductMutation } from "../Redux/ShopsAPI/ProductAPI";
 
 const modalStyle = {
   overlay: {
@@ -97,6 +97,8 @@ const AddToProduct = () => {
   const [previewUrl, setPreviewUrl] = useState("");
   const fileInputRef = useRef();
 
+  const [addProduct, { isLoading }] = useAddProductMutation();
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => {
     setIsModalOpen(false);
@@ -136,25 +138,12 @@ const AddToProduct = () => {
 
     const productData = {
       ...formData,
-      // image: uploadedImageUrl,
-      ...formData,
       price: parseFloat(formData.price),
       quantity: 1,
     };
 
     try {
-      const response = await axios.post(
-        "https://violently-internal-filly.ngrok-free.app/products/",
-        productData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "69420",
-          },
-        }
-      );
-
-      console.log("Product added:", response.data);
+      await addProduct(productData).unwrap();
       closeModal();
       Swal.fire({
         title: "Success!",
@@ -176,11 +165,12 @@ const AddToProduct = () => {
       });
     } catch (err) {
       console.error(" Error:", err);
+      closeModal();
       Swal.fire({
-        title: "Oops!",
+        title: "Add to Product Failed",
         text: "❌ Failed to add product.",
         icon: "error",
-        iconColor: "#dc3545", // Bootstrap red
+        iconColor: "#dc3545",
         confirmButtonColor: "#dc3545",
         background: "#ffffff",
         color: "#333",

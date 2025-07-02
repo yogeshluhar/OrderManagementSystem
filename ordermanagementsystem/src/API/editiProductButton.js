@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Button from "../Reusable/Const/button";
 import Swal from "sweetalert2";
 import axios from "axios";
-import '../Reusable/StyleSheet/style.css'
+import "../Reusable/StyleSheet/style.css";
+import { useUpdateProductMutation } from "../Redux/ShopsAPI/ProductAPI";
 const modalStyle = {
   overlay: {
     position: "fixed",
@@ -55,55 +56,37 @@ const modalStyle = {
   },
 };
 
-const EditProductModal = ({
-  isOpen,
-  onClose,
-  initialData,
-  onUpdateSuccess,
-}) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    category: "",
-    price: "",
-  });
+const EditProductModal = ({ isOpen, onClose, initialData }) => {
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   category: "",
+  //   price: "",
+  // });
+  const [formData, setFormData] = useState(initialData || {});
+  const [updateProduct] = useUpdateProductMutation();
 
   useEffect(() => {
-    if (initialData) {
-      setFormData({
-        name: initialData.name || "",
-        category: initialData.category || "",
-        price: initialData.price || "",
-      });
-    }
+    if (initialData) setFormData(initialData);
   }, [initialData]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedProduct = {
+    const updated = {
+      id: formData.id,
       name: formData.name,
       category: formData.category,
       price: parseFloat(formData.price),
-      quantity: initialData.quantity, // keep original quantity
-      shop_id: initialData.shop_id,
+      quantity: formData.quantity,
+      shop_id: formData.shop_id,
     };
-    console.log("Sending PATCH to API with:", updatedProduct);
+
     try {
-      const response = await axios.put(
-        `https://violently-internal-filly.ngrok-free.app/products/${initialData.id}/`,
-        updatedProduct,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "69420",
-          },
-        }
-      );
+      await updateProduct(updated).unwrap();
 
       Swal.fire({
         title: "Updated!",
@@ -122,10 +105,6 @@ const EditProductModal = ({
         },
         buttonsStyling: false,
       });
-      if (typeof onUpdateSuccess === "function") {
-        onUpdateSuccess(response.data);
-      }
-
       onClose();
     } catch (err) {
       console.error("Update error:", err);

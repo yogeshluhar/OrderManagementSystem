@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Button from "../Reusable/Const/button";
+import { useNavigate } from "react-router-dom";
+import { useAddShopMutation } from "../Redux/ShopsAPI/shopAPI";
 
 const ShopForm = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +11,9 @@ const ShopForm = () => {
   });
 
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
+  const [addShop, { isLoading, isError, isSuccess, error }] = useAddShopMutation();
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -21,15 +25,19 @@ const ShopForm = () => {
     e.preventDefault();
     setMessage("");
     try {
-      const response = await axios.post(
-        "https://violently-internal-filly.ngrok-free.app/shops/",
-        formData,
-        { headers: { "Content-Type": "application/json" } }
-      );
+      // const response = await axios.post(
+      //   "https://violently-internal-filly.ngrok-free.app/shops/",
+      //   formData,
+      //   { headers: { "Content-Type": "application/json" } }
+      // );
+      await addShop(formData).unwrap();
       setMessage("Shop added successfully!");
       setFormData({ name: "", location: "" });
+      setTimeout(() => {
+        navigate("/shopui");
+      }, 1000);
     } catch (error) {
-      setMessage("Error: " + (error.response?.data?.message || error.message));
+      setMessage("Error: " + (error?.data?.message || error.message));
     }
   };
 

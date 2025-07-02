@@ -5,6 +5,8 @@ import "../Reusable/StyleSheet/style.css";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft02Icon } from "@hugeicons/core-free-icons";
 import { useNavigate } from "react-router-dom";
+import '../Reusable/StyleSheet/style.css'
+
 const CardPage = () => {
   const { cartItems, incrementQuantity, decrementQuantity } =
     useContext(CartContext);
@@ -19,7 +21,7 @@ const CardPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={styles.wrapper}>
+    <div style={styles.wrapper} className="hide-scrollbar">
       <div style={styles.container} className="cardcontainer">
         <div onClick={() => navigate(-1)}>
           <HugeiconsIcon

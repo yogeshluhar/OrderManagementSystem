@@ -1,43 +1,102 @@
-import React from "react";
+import React, { useState } from "react";
+import Button from "../Reusable/Const/button";
+import axios from "axios";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { ViewIcon, ViewOffSlashIcon } from "@hugeicons/core-free-icons";
 
 const LoginForm = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    password: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState("");
+
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage("");
+    try {
+      const response = await axios.post(
+        "https://your-login-api-endpoint.com/login",
+        formData,
+        { headers: { "Content-Type": "application/json" } }
+      );
+      setMessage("Login successful!");
+      setFormData({ name: "", password: "" });
+    } catch (error) {
+      setMessage(
+        "Login failed: " + (error.response?.data?.message || error.message)
+      );
+    }
+  };
+
   return (
-    <div style={styles.wrapper}>
-      <form style={styles.form}>
+    <div style={styles.wrapper} >
+      <form onSubmit={handleSubmit} style={styles.form}>
         <h1 style={styles.heading}>Login</h1>
 
         <div style={styles.inputBox}>
           <input
             type="text"
+            name="name"
             placeholder="Username"
+            value={formData.name}
+            onChange={handleChange}
             required
             style={styles.input}
           />
         </div>
 
-        <div style={styles.inputBox}>
+        <div style={{ ...styles.inputBox, position: "relative" }}>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
+            name="password"
             placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
             required
             style={styles.input}
           />
+          <div
+            onClick={() => setShowPassword((prev) => !prev)}
+            style={styles.iconWrapper}
+          >
+            <HugeiconsIcon
+              icon={showPassword ? ViewIcon : ViewOffSlashIcon}
+              size={24}
+              color="#ccc"
+              strokeWidth={2}
+            />
+          </div>
         </div>
 
         <div style={styles.forgot}>
-          <a href="#" style={styles.link}>Forgot Password?</a>
+          <a style={styles.link}>Forgot Password?</a>
         </div>
 
-        <button type="submit" style={styles.button}>Login</button>
+        <Button
+          backgroundColor="#007bff"
+          color="#fff"
+          width="100%"
+          height="50px"
+          fontSize="16px"
+          fontWeight="700"
+          borderRadius="8px"
+        >
+          Login
+        </Button>
 
-        <p style={styles.orText}>or login with social platforms</p>
+        {message && <p style={{ color: "red", textAlign: "center" }}>{message}</p>}
 
-        <div style={styles.socialIcons}>
-          <a href="#" style={styles.icon}><i className="hi hi-google"></i></a>
-          <a href="#" style={styles.icon}><i className="hi hi-facebook"></i></a>
-          <a href="#" style={styles.icon}><i className="hi hi-github"></i></a>
-          <a href="#" style={styles.icon}><i className="hi hi-linkedin"></i></a>
-        </div>
       </form>
     </div>
   );
@@ -91,43 +150,13 @@ const styles = {
     color: "#333",
     textDecoration: "none",
   },
-  button: {
-    width: "100%",
-    padding: "12px",
-    backgroundColor: "#7494ec",
-    color: "#fff",
-    border: "none",
-    borderRadius: "8px",
-    fontSize: "16px",
+  iconWrapper: {
+    position: "absolute",
+    right: "15px",
+    top: "50%",
+    transform: "translateY(-50%)",
     cursor: "pointer",
-    boxSizing: "border-box",
-  },
-  orText: {
-    textAlign: "center",
-    margin: "20px 0 10px",
-    fontSize: "14px",
-    color: "#666",
-  },
-  socialIcons: {
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    gap: "10px",
-  },
-  icon: {
-    fontSize: "22px",
-    padding: "10px",
-    border: "2px solid #ccc",
-    borderRadius: "8px",
-    color: "#333",
-    width: "40px",
-    height: "40px",
-    textAlign: "center",
-    lineHeight: "20px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    boxSizing: "border-box",
+    userSelect: "none",
   },
 };
 

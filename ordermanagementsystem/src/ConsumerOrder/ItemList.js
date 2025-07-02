@@ -1,6 +1,7 @@
 import ItemCard from "./itemCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useGetProductsQuery } from "../Redux/ShopsAPI/ProductAPI";
 // const products = [
 //   { id: 1, title: "Product A", desc: "A cool product", price: 10 },
 //   { id: 2, title: "Product B", desc: "Even cooler", price: 15 },
@@ -10,23 +11,8 @@ import axios from "axios";
 // ];
 
 const ItemList = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://violently-internal-filly.ngrok-free.app/products/", {
-        headers: {
-          "Content-Type": "application/json",
-          "ngrok-skip-browser-warning": "69420",
-        },
-      })
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching data:", err);
-      });
-  }, []);
+  
+  const { data: products = [], isLoading } = useGetProductsQuery();
 
   return (
     <>

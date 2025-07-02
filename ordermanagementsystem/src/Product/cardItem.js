@@ -4,6 +4,8 @@ import axios from "axios";
 import DeleteProductButton from "../API/deleteproductItem";
 import "../Reusable/StyleSheet/style.css";
 import EditProductModal from "../API/editiProductButton";
+import { useGetProductsQuery } from "../Redux/ShopsAPI/ProductAPI";
+
 const CardItemStyle = {
   wrapper: {
     boxSizing: "border-box",
@@ -77,34 +79,12 @@ const CardItemStyle = {
   },
 };
 
-// const products = [
-//   { id: 1, title: "Product A", desc: "A cool product", price: 10 },
-//   { id: 2, title: "Product B", desc: "Even cooler", price: 15 },
-//   { id: 3, title: "Product C", desc: "The coolest", price: 20 },
-//   { id: 4, title: "Product D", desc: "Not bad", price: 12 },
-//   { id: 5, title: "Product E", desc: "Top tier", price: 18 },
-// ];
-
 const CardItem = () => {
-  const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const { data: products = [], isLoading } = useGetProductsQuery();
 
-  useEffect(() => {
-    axios
-      .get("https://violently-internal-filly.ngrok-free.app/products/", {
-        headers: {
-          "Content-Type": "application/json",
-          "ngrok-skip-browser-warning": "69420",
-        },
-      })
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching data:", err);
-      });
-  }, []);
+  if (isLoading) return <p>Loading products...</p>;
 
   const handleEditClick = (product) => {
     setSelectedProduct(product);
@@ -148,12 +128,7 @@ const CardItem = () => {
                   >
                     <h4 style={CardItemStyle.title}>{item.name}</h4>
                     <div>
-                      <DeleteProductButton
-                        productId={item.id}
-                        onDeleteSuccess={(id) =>
-                          setProducts((prev) => prev.filter((p) => p.id !== id))
-                        }
-                      />
+                      <DeleteProductButton productId={item.id} />
                       {/* <button
               style={{
                 background: "none",
@@ -196,14 +171,7 @@ const CardItem = () => {
       <EditProductModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        initialData={selectedProduct}
-        onUpdateSuccess={(updatedProduct) => {
-          setProducts((prevProducts) =>
-            prevProducts.map((item) =>
-              item.id === updatedProduct.id ? updatedProduct : item
-            )
-          );
-        }}
+        initialData
       />
     </div>
   );
